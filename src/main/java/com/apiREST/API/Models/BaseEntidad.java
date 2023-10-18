@@ -9,7 +9,8 @@ import lombok.*;
 import java.io.Serializable;
 
 @MappedSuperclass
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class BaseEntidad implements Serializable {
