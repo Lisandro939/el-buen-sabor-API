@@ -3,13 +3,7 @@ package com.apiREST.API.Models;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.util.ArrayList;
-import java.util.List;
-
-// YES
-
 @Entity
-@Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder

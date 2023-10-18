@@ -7,7 +7,6 @@ import lombok.*;
 // YES
 
 @Entity
-@Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
