@@ -1,5 +1,6 @@
 package com.apiREST.API.Repositories;
 
+import com.apiREST.API.Models.Domicilio;
 import com.apiREST.API.Models.Factura;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -11,10 +12,10 @@ import java.util.List;
 @Repository
 public interface FacturaRepository extends BaseRepository<Factura, Long> {
 
-    @Query(value = "SELECT * FROM domicilio WHERE calle LIKE %?1%", nativeQuery = true)
+    @Query(value = "SELECT * FROM factura WHERE numero LIKE %?1%", nativeQuery = true)
     List<Factura> search(String filtro);
 
-    @Query(value = "SELECT * FROM domicilio WHERE calle LIKE %?1%", nativeQuery = true)
+    @Query(value = "SELECT * FROM factura WHERE numero LIKE %?1%", nativeQuery = true)
     Page<Factura> search(String filtro, Pageable pageable);
 
 

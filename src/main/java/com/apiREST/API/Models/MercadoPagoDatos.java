@@ -7,6 +7,7 @@ import lombok.*;
 import java.sql.Date;
 
 @Entity
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder

@@ -1,10 +1,8 @@
 package com.apiREST.API.Services;
 
 import com.apiREST.API.Models.ArticuloInsumo;
-import com.apiREST.API.Models.Usuario;
 import com.apiREST.API.Repositories.ArticuloInsumoRepository;
 import com.apiREST.API.Repositories.BaseRepository;
-import com.apiREST.API.Repositories.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

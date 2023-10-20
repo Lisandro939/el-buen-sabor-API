@@ -1,5 +1,6 @@
 package com.apiREST.API.Services;
 
+import com.apiREST.API.Models.ArticuloInsumo;
 import com.apiREST.API.Models.ArticuloManufacturado;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

@@ -1,7 +1,9 @@
 package com.apiREST.API.Controllers;
 
 import com.apiREST.API.Models.Domicilio;
+import com.apiREST.API.Models.Pedido;
 import com.apiREST.API.Services.DomicilioServiceImpl;
+import com.apiREST.API.Services.PedidoServiceImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

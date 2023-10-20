@@ -1,6 +1,8 @@
 package com.apiREST.API.Controllers;
 
+import com.apiREST.API.Models.Pedido;
 import com.apiREST.API.Models.Usuario;
+import com.apiREST.API.Services.PedidoServiceImpl;
 import com.apiREST.API.Services.UsuarioServiceImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;

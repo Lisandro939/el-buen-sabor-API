@@ -1,5 +1,6 @@
 package com.apiREST.API.Repositories;
 
+import com.apiREST.API.Models.Cliente;
 import com.apiREST.API.Models.Domicilio;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
