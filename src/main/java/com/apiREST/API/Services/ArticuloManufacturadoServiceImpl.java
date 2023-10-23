@@ -32,9 +32,9 @@ public class ArticuloManufacturadoServiceImpl extends BaseServiceImpl<ArticuloMa
     }
 
     @Override
-    public Page<ArticuloManufacturado> search(String filtro, Pageable pageable) throws Exception {
+    public Page<ArticuloManufacturado> searchPaged(String filtro, Pageable pageable) throws Exception {
         try {
-            Page<ArticuloManufacturado> entities = articuloManufacturadoRepository.search(filtro, pageable);
+            Page<ArticuloManufacturado> entities = articuloManufacturadoRepository.searchPaged(filtro, pageable);
             return entities;
         } catch (Exception e) {
             throw new Exception(e.getMessage());

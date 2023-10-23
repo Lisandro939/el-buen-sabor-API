@@ -16,7 +16,7 @@ public interface RubroArticuloRepository extends BaseRepository<RubroArticulo, L
     List<RubroArticulo> search(String filtro);
 
     @Query(value = "SELECT * FROM rubro_articulo WHERE denominacion LIKE %?1%", nativeQuery = true)
-    Page<RubroArticulo> search(String filtro, Pageable pageable);
+    Page<RubroArticulo> searchPaged(String filtro, Pageable pageable);
 
 
 }

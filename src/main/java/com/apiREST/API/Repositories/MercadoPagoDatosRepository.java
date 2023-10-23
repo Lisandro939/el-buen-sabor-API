@@ -17,7 +17,7 @@ public interface MercadoPagoDatosRepository extends BaseRepository<MercadoPagoDa
     List<MercadoPagoDatos> search(String filtro);
 
     @Query(value = "SELECT * FROM mercado_pago_datos WHERE identificador_pago LIKE %?1%", nativeQuery = true)
-    Page<MercadoPagoDatos> search(String filtro, Pageable pageable);
+    Page<MercadoPagoDatos> searchPaged(String filtro, Pageable pageable);
 
 
 }

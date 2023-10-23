@@ -16,7 +16,7 @@ public interface PedidoRepository extends BaseRepository<Pedido, Long> {
     List<Pedido> search(String filtro);
 
     @Query(value = "SELECT * FROM pedido WHERE numero LIKE %?1%", nativeQuery = true)
-    Page<Pedido> search(String filtro, Pageable pageable);
+    Page<Pedido> searchPaged(String filtro, Pageable pageable);
 
 
 }

@@ -32,9 +32,9 @@ public class DomicilioServiceImpl extends BaseServiceImpl<Domicilio,Long> implem
     }
 
     @Override
-    public Page<Domicilio> search(String filtro, Pageable pageable) throws Exception {
+    public Page<Domicilio> searchPaged(String filtro, Pageable pageable) throws Exception {
         try {
-            Page<Domicilio> entities = domicilioRepository.search(filtro, pageable);
+            Page<Domicilio> entities = domicilioRepository.searchPaged(filtro, pageable);
             return entities;
         } catch (Exception e) {
             throw new Exception(e.getMessage());

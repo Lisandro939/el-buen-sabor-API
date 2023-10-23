@@ -10,6 +10,6 @@ public interface RubroGeneralService extends BaseService<RubroGeneral, Long> {
 
     List<RubroGeneral> search(String filtro) throws Exception;
 
-    Page<RubroGeneral> search(String filtro, Pageable pageable) throws Exception;
+    Page<RubroGeneral> searchPaged(String filtro, Pageable pageable) throws Exception;
 
 }

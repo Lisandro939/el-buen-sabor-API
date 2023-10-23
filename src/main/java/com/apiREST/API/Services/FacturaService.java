@@ -10,6 +10,6 @@ public interface FacturaService extends BaseService<Factura, Long> {
 
     List<Factura> search(String filtro) throws Exception;
 
-    Page<Factura> search(String filtro, Pageable pageable) throws Exception;
+    Page<Factura> searchPaged(String filtro, Pageable pageable) throws Exception;
 
 }

@@ -16,7 +16,7 @@ public interface DomicilioRepository extends BaseRepository<Domicilio, Long> {
     List<Domicilio> search(String filtro);
 
     @Query(value = "SELECT * FROM domicilio WHERE calle LIKE %?1%", nativeQuery = true)
-    Page<Domicilio> search(String filtro, Pageable pageable);
+    Page<Domicilio> searchPaged(String filtro, Pageable pageable);
 
 
 }

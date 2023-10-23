@@ -32,9 +32,9 @@ public class ClienteServiceImpl extends BaseServiceImpl<Cliente,Long> implements
     }
 
     @Override
-    public Page<Cliente> search(String filtro, Pageable pageable) throws Exception {
+    public Page<Cliente> searchPaged(String filtro, Pageable pageable) throws Exception {
         try {
-            Page<Cliente> entities = clienteRepository.search(filtro, pageable);
+            Page<Cliente> entities = clienteRepository.searchPaged(filtro, pageable);
             return entities;
         } catch (Exception e) {
             throw new Exception(e.getMessage());

@@ -11,6 +11,6 @@ public interface UsuarioService extends BaseService<Usuario, Long> {
 
     List<Usuario> search(String filtro) throws Exception;
 
-    Page<Usuario> search(String filtro, Pageable pageable) throws Exception;
+    Page<Usuario> searchPaged(String filtro, Pageable pageable) throws Exception;
 
 }

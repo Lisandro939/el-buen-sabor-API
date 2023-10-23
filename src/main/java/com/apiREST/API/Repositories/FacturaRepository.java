@@ -16,7 +16,7 @@ public interface FacturaRepository extends BaseRepository<Factura, Long> {
     List<Factura> search(String filtro);
 
     @Query(value = "SELECT * FROM factura WHERE numero LIKE %?1%", nativeQuery = true)
-    Page<Factura> search(String filtro, Pageable pageable);
+    Page<Factura> searchPaged(String filtro, Pageable pageable);
 
 
 }

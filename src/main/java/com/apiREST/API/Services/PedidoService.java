@@ -10,6 +10,6 @@ public interface PedidoService extends BaseService<Pedido, Long> {
 
     List<Pedido> search(String filtro) throws Exception;
 
-    Page<Pedido> search(String filtro, Pageable pageable) throws Exception;
+    Page<Pedido> searchPaged(String filtro, Pageable pageable) throws Exception;
 
 }

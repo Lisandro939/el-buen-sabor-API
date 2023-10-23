@@ -32,9 +32,9 @@ public class MercadoPagoDatosServiceImpl extends BaseServiceImpl<MercadoPagoDato
     }
 
     @Override
-    public Page<MercadoPagoDatos> search(String filtro, Pageable pageable) throws Exception {
+    public Page<MercadoPagoDatos> searchPaged(String filtro, Pageable pageable) throws Exception {
         try {
-            Page<MercadoPagoDatos> entities = mercadoPagoDatosRepository.search(filtro, pageable);
+            Page<MercadoPagoDatos> entities = mercadoPagoDatosRepository.searchPaged(filtro, pageable);
             return entities;
         } catch (Exception e) {
             throw new Exception(e.getMessage());

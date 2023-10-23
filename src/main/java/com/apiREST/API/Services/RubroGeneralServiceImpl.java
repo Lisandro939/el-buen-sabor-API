@@ -32,9 +32,9 @@ public class RubroGeneralServiceImpl extends BaseServiceImpl<RubroGeneral,Long> 
     }
 
     @Override
-    public Page<RubroGeneral> search(String filtro, Pageable pageable) throws Exception {
+    public Page<RubroGeneral> searchPaged(String filtro, Pageable pageable) throws Exception {
         try {
-            Page<RubroGeneral> entities = rubroGeneralRepository.search(filtro, pageable);
+            Page<RubroGeneral> entities = rubroGeneralRepository.searchPaged(filtro, pageable);
             return entities;
         } catch (Exception e) {
             throw new Exception(e.getMessage());

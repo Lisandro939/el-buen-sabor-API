@@ -32,9 +32,9 @@ public class RubroArticuloServiceImpl extends BaseServiceImpl<RubroArticulo,Long
     }
 
     @Override
-    public Page<RubroArticulo> search(String filtro, Pageable pageable) throws Exception {
+    public Page<RubroArticulo> searchPaged(String filtro, Pageable pageable) throws Exception {
         try {
-            Page<RubroArticulo> entities = rubroArticuloRepository.search(filtro, pageable);
+            Page<RubroArticulo> entities = rubroArticuloRepository.searchPaged(filtro, pageable);
             return entities;
         } catch (Exception e) {
             throw new Exception(e.getMessage());

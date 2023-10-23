@@ -15,7 +15,7 @@ public interface ClienteRepository extends BaseRepository<Cliente, Long> {
     List<Cliente> search(String filtro);
 
     @Query(value = "SELECT * FROM cliente WHERE nombre LIKE %?1%", nativeQuery = true)
-    Page<Cliente> search(String filtro, Pageable pageable);
+    Page<Cliente> searchPaged(String filtro, Pageable pageable);
 
 
 }

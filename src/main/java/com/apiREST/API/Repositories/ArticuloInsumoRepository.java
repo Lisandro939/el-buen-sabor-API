@@ -13,5 +13,5 @@ public interface ArticuloInsumoRepository extends BaseRepository<ArticuloInsumo,
     List<ArticuloInsumo> search(String filtro);
 
     @Query(value = "SELECT * FROM articulo_insumo WHERE denominacion LIKE %?1%", nativeQuery = true)
-    Page<ArticuloInsumo> search(String filtro, Pageable pageable);
+    Page<ArticuloInsumo> searchPaged(String filtro, Pageable pageable);
 }

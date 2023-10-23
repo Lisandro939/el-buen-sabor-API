@@ -32,9 +32,9 @@ public class FacturaServiceImpl extends BaseServiceImpl<Factura,Long> implements
     }
 
     @Override
-    public Page<Factura> search(String filtro, Pageable pageable) throws Exception {
+    public Page<Factura> searchPaged(String filtro, Pageable pageable) throws Exception {
         try {
-            Page<Factura> entities = facturaRepository.search(filtro, pageable);
+            Page<Factura> entities = facturaRepository.searchPaged(filtro, pageable);
             return entities;
         } catch (Exception e) {
             throw new Exception(e.getMessage());
