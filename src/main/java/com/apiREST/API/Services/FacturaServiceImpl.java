@@ -23,9 +23,9 @@ public class FacturaServiceImpl extends BaseServiceImpl<Factura,Long> implements
     }
 
     @Override
-    public List<Factura> search(String filtro) throws Exception {
+    public List<Factura> search(int numero) throws Exception {
         try {
-            List<Factura> entities = facturaRepository.search(filtro);
+            List<Factura> entities = facturaRepository.search(numero);
             return entities;
         } catch (Exception e) {
             throw new Exception(e.getMessage());
@@ -33,9 +33,9 @@ public class FacturaServiceImpl extends BaseServiceImpl<Factura,Long> implements
     }
 
     @Override
-    public Page<Factura> search(String filtro, Pageable pageable) throws Exception {
+    public Page<Factura> search(int numero, Pageable pageable) throws Exception {
         try {
-            Page<Factura> entities = facturaRepository.search(filtro, pageable);
+            Page<Factura> entities = facturaRepository.search(numero, pageable);
             return entities;
         } catch (Exception e) {
             throw new Exception(e.getMessage());

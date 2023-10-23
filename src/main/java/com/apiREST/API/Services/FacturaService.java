@@ -9,8 +9,8 @@ import java.util.List;
 
 public interface FacturaService extends BaseService<Factura, Long> {
 
-    List<Factura> search(String filtro) throws Exception;
+    List<Factura> search(int numero) throws Exception;
 
-    Page<Factura> search(String filtro, Pageable pageable) throws Exception;
+    Page<Factura> search(int numero, Pageable pageable) throws Exception;
 
 }
