@@ -8,6 +8,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.SQLException;
+
 
 public abstract class BaseControllerImpl <E extends BaseEntidad, S extends BaseServiceImpl<E, Long>> implements BaseController<E, Long> {
 
@@ -45,11 +47,18 @@ public abstract class BaseControllerImpl <E extends BaseEntidad, S extends BaseS
     public ResponseEntity<?> save(@RequestBody E entity) {
         try {
             return ResponseEntity.status(HttpStatus.OK).body(servicio.save(entity));
+        } catch (SQLException e) {
+            String errorMessage = e.getMessage();
+            int errorCode = e.getErrorCode();
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"error\":\"Error SQL - Código: " + errorCode + ", Mensaje: " + errorMessage + "\"}");
         } catch (Exception e) {
-            //
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"error\":\"Error, por favor intente más tarde.\"}");
+            String errorMessage = "Error, por favor intente más tarde.";
+            String exceptionMessage = e.getMessage();
+            String jsonResponse = "{\"error\":\"" + errorMessage + "\", \"exceptionMessage\":\"" + exceptionMessage + "\"}";
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(jsonResponse);
         }
     }
+
 
     @PutMapping("/{id}")
     public ResponseEntity<?> update(@PathVariable Long id, @RequestBody E entity) {
