@@ -11,9 +11,9 @@ import java.util.List;
 
 public interface ArticuloManufacturadoRepository extends JpaRepository<ArticuloManufacturado, Long> {
 
-    @Query(value = "SELECT * FROM articulo_manufacturado WHERE precioVenta LIKE %?1%", nativeQuery = true)
+    @Query(value = "SELECT * FROM articulo_manufacturado WHERE denominacion LIKE %?1%", nativeQuery = true)
     List<ArticuloManufacturado> search(String filtro);
 
-    @Query(value = "SELECT * FROM articulo_manufacturado WHERE precioVenta LIKE %?1%", nativeQuery = true)
+    @Query(value = "SELECT * FROM articulo_manufacturado WHERE denominacion LIKE %?1%", nativeQuery = true)
     Page<ArticuloManufacturado> search(String filtro, Pageable pageable);
 }

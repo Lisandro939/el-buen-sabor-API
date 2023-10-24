@@ -9,11 +9,11 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @CrossOrigin(origins = "*")
-@RequestMapping(path = "api/v1/usuarios")
+@RequestMapping(path = "api/v1/factura")
 public class FacturaController extends BaseControllerImpl<Factura, FacturaServiceImpl> {
 
     @GetMapping("/search")
-    public ResponseEntity<?> search(@RequestParam String filtro) {
+    public ResponseEntity<?> search(@RequestParam int filtro) {
         try {
             return ResponseEntity.status(200).body(servicio.search(filtro));
         } catch (Exception e) {
@@ -22,7 +22,7 @@ public class FacturaController extends BaseControllerImpl<Factura, FacturaServic
     }
 
     @GetMapping("/searchpaged")
-    public ResponseEntity<?> search(@RequestParam String filtro, Pageable pageable) {
+    public ResponseEntity<?> search(@RequestParam int filtro, Pageable pageable) {
         try {
             return ResponseEntity.status(200).body(servicio.search(filtro, pageable));
         } catch (Exception e) {

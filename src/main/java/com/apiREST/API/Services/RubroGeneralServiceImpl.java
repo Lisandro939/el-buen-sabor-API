@@ -7,9 +7,11 @@ import com.apiREST.API.Repositories.RubroGeneralRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class RubroGeneralServiceImpl extends BaseServiceImpl<RubroGeneral,Long> implements RubroGeneralService{
 
     @Autowired
