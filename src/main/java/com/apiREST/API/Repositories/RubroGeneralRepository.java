@@ -11,10 +11,10 @@ import java.util.List;
 
 public interface RubroGeneralRepository extends JpaRepository<RubroGeneral, Long> {
 
-    @Query(value = "SELECT * FROM rubroGeneral WHERE filtro = :filtro", nativeQuery = true)
+    @Query(value = "SELECT * FROM rubroGeneral WHERE denominacion LIKE %?1%", nativeQuery = true)
     List<RubroGeneral> search(String filtro);
 
-    @Query(value = "SELECT * FROM rubroGeneral WHERE filtro = :filtro", nativeQuery = true)
+    @Query(value = "SELECT * FROM rubroGeneral WHERE denominacion LIKE %?1%", nativeQuery = true)
     Page<RubroGeneral> search(String filtro, Pageable pageable);
 
 }
