@@ -32,9 +32,9 @@ public class ArticuloInsumoServiceImpl extends BaseServiceImpl<ArticuloInsumo,Lo
     }
 
     @Override
-    public Page<ArticuloInsumo> search(String filtro, Pageable pageable) throws Exception {
+    public Page<ArticuloInsumo> searchPaged(String filtro, Pageable pageable) throws Exception {
         try {
-            Page<ArticuloInsumo> entities = articuloInsumoRepository.search(filtro, pageable);
+            Page<ArticuloInsumo> entities = articuloInsumoRepository.searchPaged(filtro, pageable);
             return entities;
         } catch (Exception e) {
             throw new Exception(e.getMessage());
