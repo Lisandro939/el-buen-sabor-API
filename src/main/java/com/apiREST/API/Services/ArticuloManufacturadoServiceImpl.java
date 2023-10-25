@@ -14,30 +14,29 @@ import java.util.List;
 public class ArticuloManufacturadoServiceImpl extends BaseServiceImpl<ArticuloManufacturado,Long> implements ArticuloManufacturadoService {
 
     @Autowired
-    ArticuloManufacturadoRepository articuloManufacturadoRepository;
+    private ArticuloManufacturadoRepository articuloManufacturadoRepository;
 
     public ArticuloManufacturadoServiceImpl(BaseRepository<ArticuloManufacturado, Long> baseRepository, ArticuloManufacturadoRepository articuloManufacturadoRepository) {
         super(baseRepository);
         this.articuloManufacturadoRepository = articuloManufacturadoRepository;
     }
 
-
     @Override
     public List<ArticuloManufacturado> search(String filtro) throws Exception {
-        try{
+        try {
             List<ArticuloManufacturado> entities = articuloManufacturadoRepository.search(filtro);
             return entities;
-        } catch (Exception e){
+        } catch (Exception e) {
             throw new Exception(e.getMessage());
         }
     }
 
     @Override
-    public Page<ArticuloManufacturado> search(String filtro, Pageable pageable) throws Exception {
+    public Page<ArticuloManufacturado> searchPaged(String filtro, Pageable pageable) throws Exception {
         try {
-            Page<ArticuloManufacturado> entities = articuloManufacturadoRepository.search(filtro, pageable);
+            Page<ArticuloManufacturado> entities = articuloManufacturadoRepository.searchPaged(filtro, pageable);
             return entities;
-        } catch (Exception e){
+        } catch (Exception e) {
             throw new Exception(e.getMessage());
         }
     }
