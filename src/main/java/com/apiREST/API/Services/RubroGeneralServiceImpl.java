@@ -1,6 +1,5 @@
 package com.apiREST.API.Services;
 
-import com.apiREST.API.Models.RubroArticulo;
 import com.apiREST.API.Models.RubroGeneral;
 import com.apiREST.API.Repositories.BaseRepository;
 import com.apiREST.API.Repositories.RubroGeneralRepository;
@@ -12,11 +11,10 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class RubroGeneralServiceImpl extends BaseServiceImpl<RubroGeneral,Long> implements RubroGeneralService{
+public class RubroGeneralServiceImpl extends BaseServiceImpl<RubroGeneral,Long> implements RubroGeneralService {
 
     @Autowired
     private RubroGeneralRepository rubroGeneralRepository;
-
 
     public RubroGeneralServiceImpl(BaseRepository<RubroGeneral, Long> baseRepository, RubroGeneralRepository rubroGeneralRepository) {
         super(baseRepository);
@@ -34,9 +32,9 @@ public class RubroGeneralServiceImpl extends BaseServiceImpl<RubroGeneral,Long> 
     }
 
     @Override
-    public Page<RubroGeneral> search(String filtro, Pageable pageable) throws Exception {
+    public Page<RubroGeneral> searchPaged(String filtro, Pageable pageable) throws Exception {
         try {
-            Page<RubroGeneral> entities = rubroGeneralRepository.search(filtro, pageable);
+            Page<RubroGeneral> entities = rubroGeneralRepository.searchPaged(filtro, pageable);
             return entities;
         } catch (Exception e) {
             throw new Exception(e.getMessage());
