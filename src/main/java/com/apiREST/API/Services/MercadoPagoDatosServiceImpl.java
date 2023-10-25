@@ -6,10 +6,12 @@ import com.apiREST.API.Repositories.MercadoPagoDatosRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-public class MercadoPagoDatosServiceImpl extends BaseServiceImpl<MercadoPagoDatos, Long> implements MercadoPagoDatosService {
+@Service
+public class MercadoPagoDatosServiceImpl extends BaseServiceImpl<MercadoPagoDatos,Long> implements MercadoPagoDatosService {
 
     @Autowired
     private MercadoPagoDatosRepository mercadoPagoDatosRepository;
@@ -30,13 +32,12 @@ public class MercadoPagoDatosServiceImpl extends BaseServiceImpl<MercadoPagoDato
     }
 
     @Override
-    public Page<MercadoPagoDatos> search(String filtro, Pageable pageable) throws Exception {
+    public Page<MercadoPagoDatos> searchPaged(String filtro, Pageable pageable) throws Exception {
         try {
-            Page<MercadoPagoDatos> entities = mercadoPagoDatosRepository.search(filtro, pageable);
+            Page<MercadoPagoDatos> entities = mercadoPagoDatosRepository.searchPaged(filtro, pageable);
             return entities;
         } catch (Exception e) {
             throw new Exception(e.getMessage());
         }
     }
-
 }
