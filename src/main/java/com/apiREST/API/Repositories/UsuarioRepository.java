@@ -11,11 +11,10 @@ import java.util.List;
 @Repository
 public interface UsuarioRepository extends BaseRepository<Usuario, Long> {
 
-    @Query(value = "SELECT * FROM usuarios WHERE usuario LIKE %?1%", nativeQuery = true)
+    @Query(value = "SELECT * FROM usuario WHERE usuario LIKE %?1%", nativeQuery = true)
     List<Usuario> search(String filtro);
 
-    @Query(value = "SELECT * FROM usuarios WHERE usuario LIKE %?1%", nativeQuery = true)
-    Page<Usuario> search(String filtro, Pageable pageable);
-
+    @Query(value = "SELECT * FROM usuario WHERE usuario LIKE %?1%", nativeQuery = true)
+    Page<Usuario> searchPaged(String filtro, Pageable pageable);
 
 }
