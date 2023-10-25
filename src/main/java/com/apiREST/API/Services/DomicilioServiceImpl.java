@@ -14,7 +14,7 @@ import java.util.List;
 public class DomicilioServiceImpl extends BaseServiceImpl<Domicilio,Long> implements DomicilioService {
 
     @Autowired
-    DomicilioRepository domicilioRepository;
+    private DomicilioRepository domicilioRepository;
 
     public DomicilioServiceImpl(BaseRepository<Domicilio, Long> baseRepository, DomicilioRepository domicilioRepository) {
         super(baseRepository);
@@ -23,20 +23,20 @@ public class DomicilioServiceImpl extends BaseServiceImpl<Domicilio,Long> implem
 
     @Override
     public List<Domicilio> search(String filtro) throws Exception {
-        try{
+        try {
             List<Domicilio> entities = domicilioRepository.search(filtro);
             return entities;
-        }catch (Exception e){
+        } catch (Exception e) {
             throw new Exception(e.getMessage());
         }
     }
 
     @Override
-    public Page<Domicilio> search(String filtro, Pageable pageable) throws Exception {
-        try{
-            Page<Domicilio> entities = domicilioRepository.search(filtro, pageable);
+    public Page<Domicilio> searchPaged(String filtro, Pageable pageable) throws Exception {
+        try {
+            Page<Domicilio> entities = domicilioRepository.searchPaged(filtro, pageable);
             return entities;
-        }catch(Exception e){
+        } catch (Exception e) {
             throw new Exception(e.getMessage());
         }
     }
