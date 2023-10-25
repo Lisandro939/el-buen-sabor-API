@@ -1,15 +1,17 @@
 package com.apiREST.API.Controllers;
 
-import com.apiREST.API.Models.Factura;
-import com.apiREST.API.Services.FacturaServiceImpl;
+import com.apiREST.API.Models.Domicilio;
+import com.apiREST.API.Models.Pedido;
+import com.apiREST.API.Services.DomicilioServiceImpl;
+import com.apiREST.API.Services.PedidoServiceImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @CrossOrigin(origins = "*")
-@RequestMapping(path = "api/v1/facturas")
-public class FacturaController extends BaseControllerImpl<Factura, FacturaServiceImpl> {
+@RequestMapping(path = "api/v1/domicilios")
+public class DomicilioController extends BaseControllerImpl<Domicilio, DomicilioServiceImpl> {
 
     @GetMapping("/search")
     public ResponseEntity<?> search(@RequestParam String filtro) {
