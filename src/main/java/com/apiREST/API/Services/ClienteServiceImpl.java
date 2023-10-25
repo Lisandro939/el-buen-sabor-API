@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class ClienteServiceImpl extends BaseServiceImpl<Cliente, Long> implements ClienteService{
+public class ClienteServiceImpl extends BaseServiceImpl<Cliente,Long> implements ClienteService {
 
     @Autowired
     private ClienteRepository clienteRepository;
@@ -32,13 +32,12 @@ public class ClienteServiceImpl extends BaseServiceImpl<Cliente, Long> implement
     }
 
     @Override
-    public Page<Cliente> search(String filtro, Pageable pageable) throws Exception {
+    public Page<Cliente> searchPaged(String filtro, Pageable pageable) throws Exception {
         try {
-            Page<Cliente> entities = clienteRepository.search(filtro, pageable);
+            Page<Cliente> entities = clienteRepository.searchPaged(filtro, pageable);
             return entities;
         } catch (Exception e) {
             throw new Exception(e.getMessage());
         }
     }
 }
-
