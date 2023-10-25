@@ -1,6 +1,8 @@
 package com.apiREST.API.Controllers;
 
+import com.apiREST.API.Models.Pedido;
 import com.apiREST.API.Models.Usuario;
+import com.apiREST.API.Services.PedidoServiceImpl;
 import com.apiREST.API.Services.UsuarioServiceImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
@@ -21,9 +23,9 @@ public class UsuarioController extends BaseControllerImpl<Usuario, UsuarioServic
     }
 
     @GetMapping("/searchpaged")
-    public ResponseEntity<?> search(@RequestParam String filtro, Pageable pageable) {
+    public ResponseEntity<?> searchPaged(@RequestParam String filtro, Pageable pageable) {
         try {
-            return ResponseEntity.status(200).body(servicio.search(filtro, pageable));
+            return ResponseEntity.status(200).body(servicio.searchPaged(filtro, pageable));
         } catch (Exception e) {
             return ResponseEntity.status(500).body("{\"error\":\"Error, por favor intente más tarde.\"}");
         }
