@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class PedidoServiceImpl extends BaseServiceImpl<Pedido, Long> implements PedidoService{
+public class PedidoServiceImpl extends BaseServiceImpl<Pedido,Long> implements PedidoService {
 
     @Autowired
     private PedidoRepository pedidoRepository;
@@ -22,9 +22,9 @@ public class PedidoServiceImpl extends BaseServiceImpl<Pedido, Long> implements 
     }
 
     @Override
-    public List<Pedido> search(int numero) throws Exception {
+    public List<Pedido> search(String filtro) throws Exception {
         try {
-            List<Pedido> entities = pedidoRepository.search(numero);
+            List<Pedido> entities = pedidoRepository.search(filtro);
             return entities;
         } catch (Exception e) {
             throw new Exception(e.getMessage());
@@ -32,9 +32,9 @@ public class PedidoServiceImpl extends BaseServiceImpl<Pedido, Long> implements 
     }
 
     @Override
-    public Page<Pedido> search(int numero, Pageable pageable) throws Exception {
+    public Page<Pedido> searchPaged(String filtro, Pageable pageable) throws Exception {
         try {
-            Page<Pedido> entities = pedidoRepository.search(numero, pageable);
+            Page<Pedido> entities = pedidoRepository.searchPaged(filtro, pageable);
             return entities;
         } catch (Exception e) {
             throw new Exception(e.getMessage());
