@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @CrossOrigin(origins = "*")
-@RequestMapping(path = "api/v1/articulosIns")
+@RequestMapping(path = "api/v1/articulosInsumos")
 public class ArticuloInsumoController extends BaseControllerImpl<ArticuloInsumo, ArticuloInsumoServiceImpl> {
 
     @GetMapping("/search")
@@ -21,9 +21,9 @@ public class ArticuloInsumoController extends BaseControllerImpl<ArticuloInsumo,
     }
 
     @GetMapping("/searchpaged")
-    public ResponseEntity<?> search(@RequestParam String filtro, Pageable pageable) {
+    public ResponseEntity<?> searchPaged(@RequestParam String filtro, Pageable pageable) {
         try {
-            return ResponseEntity.status(200).body(servicio.search(filtro, pageable));
+            return ResponseEntity.status(200).body(servicio.searchPaged(filtro, pageable));
         } catch (Exception e) {
             return ResponseEntity.status(500).body("{\"error\":\"Error, por favor intente más tarde.\"}");
         }
