@@ -6,9 +6,10 @@ import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 
-public interface PedidoService extends BaseService<Pedido,Long> {
+public interface PedidoService extends BaseService<Pedido, Long> {
 
-    List<Pedido> search(int numero) throws Exception;
+    List<Pedido> search(String filtro) throws Exception;
 
-    Page<Pedido> search(int numero, Pageable pageable) throws Exception;
+    Page<Pedido> searchPaged(String filtro, Pageable pageable) throws Exception;
+
 }
