@@ -11,9 +11,11 @@ import java.util.List;
 @Repository
 public interface FacturaRepository extends BaseRepository<Factura, Long> {
 
-    @Query(value = "SELECT * FROM factura WHERE numero = :numero", nativeQuery = true)
-    List<Factura> search(int numero);
+    @Query(value = "SELECT * FROM factura WHERE numero LIKE %?1%", nativeQuery = true)
+    List<Factura> search(String filtro);
 
-    @Query(value = "SELECT * FROM factura WHERE numero = :numero", nativeQuery = true)
-    Page<Factura> search(int numero, Pageable pageable);
+    @Query(value = "SELECT * FROM factura WHERE numero LIKE %?1%", nativeQuery = true)
+    Page<Factura> searchPaged(String filtro, Pageable pageable);
+
+
 }
