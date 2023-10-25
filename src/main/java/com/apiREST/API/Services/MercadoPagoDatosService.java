@@ -10,5 +10,6 @@ public interface MercadoPagoDatosService extends BaseService<MercadoPagoDatos, L
 
     List<MercadoPagoDatos> search(String filtro) throws Exception;
 
-    Page<MercadoPagoDatos> search(String filtro, Pageable pageable) throws Exception;
+    Page<MercadoPagoDatos> searchPaged(String filtro, Pageable pageable) throws Exception;
+
 }
