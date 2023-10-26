@@ -14,6 +14,10 @@
 
 Enlace al tablero de [Jira](https://lisandrof.atlassian.net/jira/software/projects/SC/boards/1)
 
+## Rúbrica
+
+[Link](https://docs.google.com/spreadsheets/d/1sKaQUSvhagXFeOGQ6-1vPlrDIGUmnNql/edit#gid=881315513)
+
 ## Integrantes del grupo
 
 [Benvenutti, Luciana.](https://github.com/luchibenve)
