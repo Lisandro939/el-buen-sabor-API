@@ -77,4 +77,8 @@ public abstract class BaseControllerImpl <E extends BaseEntidad, S extends BaseS
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"error\":\"Error, por favor intente más tarde.\"}");
         }
     }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 61101a2426169477ed1220dcfb2b350328a9b165

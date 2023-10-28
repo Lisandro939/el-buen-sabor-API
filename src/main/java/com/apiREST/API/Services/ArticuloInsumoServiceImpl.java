@@ -40,4 +40,8 @@ public class ArticuloInsumoServiceImpl extends BaseServiceImpl<ArticuloInsumo,Lo
             throw new Exception(e.getMessage());
         }
     }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 61101a2426169477ed1220dcfb2b350328a9b165

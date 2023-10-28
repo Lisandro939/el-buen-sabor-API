@@ -1,15 +1,17 @@
 package com.apiREST.API.Controllers;
 
-import com.apiREST.API.Models.ArticuloInsumo;
-import com.apiREST.API.Services.ArticuloInsumoServiceImpl;
+import com.apiREST.API.Models.ArticuloManufacturado;
+import com.apiREST.API.Models.ArticuloManufacturadoDetalle;
+import com.apiREST.API.Services.ArticuloManufacturadoDetalleServiceImpl;
+import com.apiREST.API.Services.ArticuloManufacturadoServiceImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @CrossOrigin(origins = "*")
-@RequestMapping(path = "api/v1/articulosInsumos")
-public class ArticuloInsumoController extends BaseControllerImpl<ArticuloInsumo, ArticuloInsumoServiceImpl> {
+@RequestMapping(path = "api/v1/articulosManufacturadosDetalle")
+public class ArticuloManufacturadoDetalleController extends BaseControllerImpl<ArticuloManufacturadoDetalle, ArticuloManufacturadoDetalleServiceImpl> {
 
     @GetMapping("/search")
     public ResponseEntity<?> search(@RequestParam String filtro) {
@@ -28,8 +30,4 @@ public class ArticuloInsumoController extends BaseControllerImpl<ArticuloInsumo,
             return ResponseEntity.status(500).body("{\"error\":\"Error, por favor intente más tarde.\"}");
         }
     }
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> 61101a2426169477ed1220dcfb2b350328a9b165
