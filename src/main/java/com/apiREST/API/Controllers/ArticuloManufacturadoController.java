@@ -29,3 +29,4 @@ public class ArticuloManufacturadoController extends BaseControllerImpl<Articulo
         }
     }
 }
+
