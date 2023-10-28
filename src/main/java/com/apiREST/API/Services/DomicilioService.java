@@ -12,4 +12,8 @@ public interface DomicilioService extends BaseService<Domicilio, Long> {
 
     Page<Domicilio> searchPaged(String filtro, Pageable pageable) throws Exception;
 
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 61101a2426169477ed1220dcfb2b350328a9b165

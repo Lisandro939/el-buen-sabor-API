@@ -28,4 +28,8 @@ public class ArticuloInsumoController extends BaseControllerImpl<ArticuloInsumo,
             return ResponseEntity.status(500).body("{\"error\":\"Error, por favor intente más tarde.\"}");
         }
     }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 61101a2426169477ed1220dcfb2b350328a9b165
