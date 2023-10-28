@@ -12,8 +12,4 @@ public class ApiApplication {
 		SpringApplication.run(ApiApplication.class, args);
 		System.out.println("API REST corriendo");
 	}
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> 61101a2426169477ed1220dcfb2b350328a9b165

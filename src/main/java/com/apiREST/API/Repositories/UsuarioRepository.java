@@ -1,6 +1,5 @@
 package com.apiREST.API.Repositories;
 
-import com.apiREST.API.Models.Cliente;
 import com.apiREST.API.Models.Usuario;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -17,9 +16,5 @@ public interface UsuarioRepository extends BaseRepository<Usuario, Long> {
 
     @Query(value = "SELECT * FROM usuario WHERE usuario LIKE %?1%", nativeQuery = true)
     Page<Usuario> searchPaged(String filtro, Pageable pageable);
-<<<<<<< HEAD
-
-=======
->>>>>>> 61101a2426169477ed1220dcfb2b350328a9b165
 
 }
