@@ -1,7 +1,10 @@
 package com.apiREST.API.Services;
 
 import com.apiREST.API.Enums.EstadoPedido;
+<<<<<<< HEAD
+=======
 import com.apiREST.API.Enums.TipoEnvio;
+>>>>>>> 44c05cecbd3d8fb02659d5de016e249514ef8c43
 import com.apiREST.API.Models.Pedido;
 import com.apiREST.API.Repositories.BaseRepository;
 import com.apiREST.API.Repositories.PedidoRepository;
@@ -75,6 +78,16 @@ public class PedidoServiceImpl extends BaseServiceImpl<Pedido,Long> implements P
     public Page<Pedido> searchByEstadoPedido(EstadoPedido estado, Pageable pageable) throws Exception {
         try {
             return pedidoRepository.searchByEstadoPedido(estado, pageable);
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        }
+    }
+
+    @Override
+    public List<Pedido> searchByState(EstadoPedido filtro) throws Exception {
+        try {
+            List<Pedido> entities = pedidoRepository.searchByState(filtro);
+            return entities;
         } catch (Exception e) {
             throw new Exception(e.getMessage());
         }

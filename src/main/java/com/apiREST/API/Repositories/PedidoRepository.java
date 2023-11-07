@@ -1,8 +1,11 @@
 package com.apiREST.API.Repositories;
 
 import com.apiREST.API.Enums.EstadoPedido;
+<<<<<<< HEAD
+=======
 import com.apiREST.API.Enums.TipoEnvio;
 import com.apiREST.API.Models.Cliente;
+>>>>>>> 44c05cecbd3d8fb02659d5de016e249514ef8c43
 import com.apiREST.API.Models.Pedido;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -39,6 +42,9 @@ public interface PedidoRepository extends BaseRepository<Pedido, Long> {
 
     @Query("SELECT p FROM Pedido p WHERE p.estado = :estado")
     Page<Pedido> searchByEstadoPedido(@Param("estado") EstadoPedido estado, Pageable pageable);
+
+    @Query(value = "SELECT * FROM pedido WHERE estado LIKE %?1%", nativeQuery = true)
+    List<Pedido> searchByState(EstadoPedido filtro);
 
 
 }

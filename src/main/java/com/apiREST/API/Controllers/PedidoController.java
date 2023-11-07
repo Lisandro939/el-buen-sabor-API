@@ -1,7 +1,10 @@
 package com.apiREST.API.Controllers;
 
 import com.apiREST.API.Enums.EstadoPedido;
+<<<<<<< HEAD
+=======
 import com.apiREST.API.Enums.TipoEnvio;
+>>>>>>> 44c05cecbd3d8fb02659d5de016e249514ef8c43
 import com.apiREST.API.Models.Pedido;
 import com.apiREST.API.Services.PedidoServiceImpl;
 import org.springframework.data.domain.Pageable;
@@ -80,6 +83,15 @@ public class PedidoController extends BaseControllerImpl<Pedido, PedidoServiceIm
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("{\"error\":\"Estado no válido: " + estado + "\"}");
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("{\"error\":\"" + e.getMessage() + "\"}");
+        }
+    }
+
+    @GetMapping("/searchbystate")
+    public ResponseEntity<?> searchByState(@RequestParam EstadoPedido filtro) {
+        try {
+            return ResponseEntity.status(200).body(servicio.searchByState(filtro));
+        } catch (Exception e) {
+            return ResponseEntity.status(500).body("{\"error\":\"Error, por favor intente más tarde.\"}");
         }
     }
 }
