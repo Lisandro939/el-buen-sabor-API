@@ -1,5 +1,6 @@
 package com.apiREST.API.Controllers;
 
+import com.apiREST.API.Enums.EstadoPedido;
 import com.apiREST.API.Models.Pedido;
 import com.apiREST.API.Services.PedidoServiceImpl;
 import org.springframework.data.domain.Pageable;
@@ -24,6 +25,15 @@ public class PedidoController extends BaseControllerImpl<Pedido, PedidoServiceIm
     public ResponseEntity<?> searchPaged(@RequestParam String filtro, Pageable pageable) {
         try {
             return ResponseEntity.status(200).body(servicio.searchPaged(filtro, pageable));
+        } catch (Exception e) {
+            return ResponseEntity.status(500).body("{\"error\":\"Error, por favor intente más tarde.\"}");
+        }
+    }
+
+    @GetMapping("/searchbystate")
+    public ResponseEntity<?> searchByState(@RequestParam EstadoPedido filtro) {
+        try {
+            return ResponseEntity.status(200).body(servicio.searchByState(filtro));
         } catch (Exception e) {
             return ResponseEntity.status(500).body("{\"error\":\"Error, por favor intente más tarde.\"}");
         }

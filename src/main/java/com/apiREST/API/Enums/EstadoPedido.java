@@ -1,7 +1,9 @@
 package com.apiREST.API.Enums;
 
 public enum EstadoPedido {
-    Iniciado,
-    Entregado,
-    Preparacion
+    AConfirmar,
+    EnCocina,
+    Listo,
+    EnDelivery,
+    Entregado
 }
