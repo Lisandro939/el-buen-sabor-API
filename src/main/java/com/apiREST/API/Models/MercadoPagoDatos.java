@@ -1,7 +1,10 @@
 package com.apiREST.API.Models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import com.apiREST.API.Enums.EstadoMercadoPago;
+import com.apiREST.API.Enums.EstadoPedido;
+import com.apiREST.API.Enums.FormaPago;
+import com.apiREST.API.Enums.MetodoPago;
+import jakarta.persistence.*;
 import lombok.*;
 
 import java.sql.Date;
@@ -17,8 +20,18 @@ public class MercadoPagoDatos extends BaseEntidad {
     private long identificadorPago;
     private Date fechaCreacion;
     private Date fechaAprobacion;
-    private String formaPago;
-    private String metodoPago;
+
+    @Column(name = "forma_pago", length = 50, nullable = false)
+    @Enumerated(EnumType.STRING)
+    private FormaPago formaPago;
+
+    @Column(name = "metodo_pago", length = 50, nullable = false)
+    @Enumerated(EnumType.STRING)
+    private MetodoPago metodoPago;
+
     private String nroTarjeta;
-    private String estado;
+
+    @Column(name = "estado", length = 50, nullable = false)
+    @Enumerated(EnumType.STRING)
+    private EstadoMercadoPago estado;
 }

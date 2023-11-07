@@ -1,5 +1,7 @@
 package com.apiREST.API.Models;
 
+import com.apiREST.API.Enums.EstadoPedido;
+import com.apiREST.API.Enums.TipoEnvio;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -22,11 +24,16 @@ public class Pedido extends BaseEntidad {
     @Column(name = "numero", length = 50, nullable = false)
     private int numero;
 
+    @Column(name = "estado", length = 50, nullable = false)
+    @Enumerated(EnumType.STRING)
+    private EstadoPedido estado;
+
     @Column(name = "hora_estimada_fin", length = 50, nullable = false)
     private Time horaEstimadaFin;
 
     @Column(name = "tipo_envio", length = 50, nullable = false)
-    private int tipoEnvio;
+    @Enumerated(EnumType.STRING)
+    private TipoEnvio tipoEnvio;
 
     @Column(name = "total", length = 50, nullable = false)
     private double total;

@@ -1,5 +1,6 @@
 package com.apiREST.API.Models;
 
+import com.apiREST.API.Enums.FormaPago;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -16,11 +17,19 @@ import java.util.List;
 public class Factura extends BaseEntidad {
 
     private Date fecha;
+
     private int numero;
+
     private double montoDescuento;
-    private String formaPago;
+
+    @Column(name = "forma_pago", length = 50, nullable = false)
+    @Enumerated(EnumType.STRING)
+    private FormaPago formaPago;
+
     private String nroTarjeta;
+
     private double totalVenta;
+
     private double totalCosto;
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)

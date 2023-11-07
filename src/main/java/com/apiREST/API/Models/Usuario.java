@@ -1,7 +1,7 @@
 package com.apiREST.API.Models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import com.apiREST.API.Enums.Rol;
+import jakarta.persistence.*;
 import lombok.*;
 
 // YES
@@ -16,6 +16,9 @@ public class Usuario extends BaseEntidad {
 
     private String usuario;
     private String clave;
-    private String rol;
+
+    @Column(name = "rol", length = 50, nullable = false)
+    @Enumerated(EnumType.STRING)
+    private Rol rol;
 
 }
