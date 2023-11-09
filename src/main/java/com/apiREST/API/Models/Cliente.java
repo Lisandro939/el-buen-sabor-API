@@ -3,6 +3,7 @@ package com.apiREST.API.Models;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,6 +28,12 @@ public class Cliente extends BaseEntidad {
 
     @Column(name = "email", length = 50, nullable = false)
     private String email;
+
+    @Column(name = "fecha_baja", length = 50, nullable = true)
+    private Date fechaBaja;
+
+    @Column(name = "fecha_nacimiento", length = 50, nullable = false)
+    private Date fechaNacimiento;
 
     @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     @JoinColumn(name = "domicilio_id", referencedColumnName = "id")

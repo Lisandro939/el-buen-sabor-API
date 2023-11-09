@@ -14,7 +14,10 @@ import lombok.*;
 @Table(name = "usuario")
 public class Usuario extends BaseEntidad {
 
+    @Column(name = "usuario", length = 50, nullable = false)
     private String usuario;
+
+    @Column(name = "clave", length = 50, nullable = false)
     private String clave;
 
     @Column(name = "rol", length = 50, nullable = false)

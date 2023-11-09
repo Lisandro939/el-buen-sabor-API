@@ -12,7 +12,6 @@ import java.util.List;
 
 @Service
 public class ClienteServiceImpl extends BaseServiceImpl<Cliente,Long> implements ClienteService {
-
     @Autowired
     private ClienteRepository clienteRepository;
 
@@ -36,6 +35,35 @@ public class ClienteServiceImpl extends BaseServiceImpl<Cliente,Long> implements
         try {
             Page<Cliente> entities = clienteRepository.searchPaged(filtro, pageable);
             return entities;
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        }
+    }
+
+    @Override
+    public String login(String email, String clave) throws Exception {
+        try {
+            Cliente cliente = clienteRepository.login(email, clave);
+            if (cliente == null) {
+                String jsonResponseFalse = "{\"login\": false}";
+                return jsonResponseFalse;
+            } else if (cliente.getFechaBaja() != null) {
+                String jsonResponseFechaBaja = "{\"login\": cliente dado de baja}";
+                return jsonResponseFechaBaja;
+            } else {
+                String jsonResponseTrue = "{\"login\": true}";
+                return jsonResponseTrue;
+            }
+        } catch (Exception e) {
+            throw new Exception("{ \"response\": \"" + e.getMessage() + "\" }");
+        }
+    }
+
+    @Override
+    public Cliente findByEmail(String email) throws Exception {
+        try {
+            Cliente cliente = clienteRepository.findByEmail(email);
+            return cliente;
         } catch (Exception e) {
             throw new Exception(e.getMessage());
         }

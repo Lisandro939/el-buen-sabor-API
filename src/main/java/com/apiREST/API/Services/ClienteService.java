@@ -12,4 +12,8 @@ public interface ClienteService extends BaseService<Cliente, Long> {
 
     Page<Cliente> searchPaged(String filtro, Pageable pageable) throws Exception;
 
+    String login(String email, String clave) throws Exception;
+
+    Cliente findByEmail(String email) throws Exception;
+
 }
