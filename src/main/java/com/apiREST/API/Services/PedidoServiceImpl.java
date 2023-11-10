@@ -2,8 +2,11 @@ package com.apiREST.API.Services;
 
 import com.apiREST.API.Enums.EstadoPedido;
 import com.apiREST.API.Enums.TipoEnvio;
+import com.apiREST.API.Models.Cliente;
+import com.apiREST.API.Models.Factura;
 import com.apiREST.API.Models.Pedido;
 import com.apiREST.API.Repositories.BaseRepository;
+import com.apiREST.API.Repositories.ClienteRepository;
 import com.apiREST.API.Repositories.PedidoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -12,12 +15,14 @@ import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 @Service
 public class PedidoServiceImpl extends BaseServiceImpl<Pedido,Long> implements PedidoService {
 
     @Autowired
     private PedidoRepository pedidoRepository;
+    private ClienteRepository clienteRepository;
 
     public PedidoServiceImpl(BaseRepository<Pedido, Long> baseRepository, PedidoRepository pedidoRepository) {
         super(baseRepository);
@@ -41,6 +46,7 @@ public class PedidoServiceImpl extends BaseServiceImpl<Pedido,Long> implements P
             throw new Exception(e.getMessage());
         }
     }
+
 
     // Método para filtrar por tipo de envío
     @Override
@@ -72,6 +78,16 @@ public class PedidoServiceImpl extends BaseServiceImpl<Pedido,Long> implements P
     }
 
     @Override
+    public List<Pedido> searchByState(EstadoPedido filtro) throws Exception {
+        try {
+            List<Pedido> entities = pedidoRepository.searchByState(filtro);
+            return entities;
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        }
+    }
+
+    @Override
     public Page<Pedido> searchByEstadoPedido(EstadoPedido estado, Pageable pageable) throws Exception {
         try {
             return pedidoRepository.searchByEstadoPedido(estado, pageable);
@@ -81,12 +97,26 @@ public class PedidoServiceImpl extends BaseServiceImpl<Pedido,Long> implements P
     }
 
     @Override
-    public List<Pedido> searchByState(EstadoPedido filtro) throws Exception {
+    public List<Pedido> obtenerPedidosPorClienteId(Long clienteId) throws Exception {
         try {
-            List<Pedido> entities = pedidoRepository.searchByState(filtro);
-            return entities;
+            List<Pedido> entities = pedidoRepository.findByClienteId(clienteId);
+            return pedidoRepository.findByClienteId(clienteId);
         } catch (Exception e) {
-            throw new Exception(e.getMessage());
+            throw new Exception("Error al obtener pedidos por clienteId: " + e.getMessage());
         }
     }
+
+    @Override
+    public Pedido obtenerPedidoPorNumero(int numero) throws Exception {
+        try {
+
+            return pedidoRepository.findByNumeroPedido(numero)
+                    .orElseThrow(() -> new NoSuchElementException("Pedido no encontrado"));
+        } catch (Exception e) {
+            throw new Exception("Error al obtener pedido por número: " + e.getMessage());
+        }
+    }
+
+
+
 }

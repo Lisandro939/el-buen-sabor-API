@@ -2,6 +2,7 @@ package com.apiREST.API.Repositories;
 
 import com.apiREST.API.Enums.EstadoPedido;
 import com.apiREST.API.Enums.TipoEnvio;
+import com.apiREST.API.Models.Cliente;
 import com.apiREST.API.Models.Pedido;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface PedidoRepository extends BaseRepository<Pedido, Long> {
@@ -42,5 +44,17 @@ public interface PedidoRepository extends BaseRepository<Pedido, Long> {
     @Query(value = "SELECT * FROM pedido WHERE estado LIKE %?1%", nativeQuery = true)
     List<Pedido> searchByState(EstadoPedido filtro);
 
+    //Historial pedidos
+    @Query(value = "SELECT * FROM pedido WHERE cliente_id LIKE %?1%", nativeQuery = true)
+    List<Pedido> findByClienteId(Long clienteId);
 
+    @Query(value = "SELECT * FROM pedido WHERE numero LIKE %?1%", nativeQuery = true)
+    Optional<Pedido> findByNumeroPedido(int numero);
+
+    @Query(value = "SELECT p.fecha, p.numero, p.total, d.fecha AS detalle_fecha, d.numero_pedido, d.subtotal, a.tiempo_estimado_cocina, a.denominacion, a.precio_venta, a.imagen " +
+            "FROM pedido p " +
+            "JOIN detalle_pedido d ON p.id = d.pedido_id " +
+            "LEFT JOIN articulo_manufacturado a ON d.articulo_manufacturado_id = a.id " +
+            "WHERE p.numero = :numero", nativeQuery = true)
+    List<Object[]> obtenerHistorialPedidoDTO(@Param("numero") int numero);
 }

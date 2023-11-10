@@ -40,4 +40,5 @@ public class FacturaServiceImpl extends BaseServiceImpl<Factura,Long> implements
             throw new Exception(e.getMessage());
         }
     }
+
 }
