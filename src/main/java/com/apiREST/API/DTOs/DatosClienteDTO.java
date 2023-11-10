@@ -1,4 +1,4 @@
-package com.apiREST.API.Models;
+package com.apiREST.API.DTOs;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,22 +9,24 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class NuevoClienteDTO {
+public class DatosClienteDTO {
 
     private String nombre;
 
     private String apellido;
-
-    private String calle;
-
-    private int numero;
-
-    private String localidad;
 
     private long telefono;
 
     private String email;
 
     private String clave;
+
+    private String fechaNacimiento;
+
+    private String calle;
+
+    private int numero;
+
+    private String localidad;
 
 }

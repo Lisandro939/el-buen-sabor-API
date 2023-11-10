@@ -1,5 +1,6 @@
 package com.apiREST.API.Services;
 
+import com.apiREST.API.DTOs.RankingProductosDTO;
 import com.apiREST.API.Models.ArticuloInsumo;
 import com.apiREST.API.Models.ArticuloManufacturado;
 import org.springframework.data.domain.Page;
@@ -12,5 +13,7 @@ public interface ArticuloManufacturadoService extends BaseService<ArticuloManufa
     List<ArticuloManufacturado> search(String filtro) throws Exception;
 
     Page<ArticuloManufacturado> searchPaged(String filtro, Pageable pageable) throws Exception;
+
+    List<RankingProductosDTO> ranking(String producto, String desde, String hasta) throws Exception;
 
 }

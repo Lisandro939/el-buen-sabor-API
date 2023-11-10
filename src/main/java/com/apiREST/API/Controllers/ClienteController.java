@@ -1,5 +1,7 @@
 package com.apiREST.API.Controllers;
 
+import com.apiREST.API.DTOs.DatosClienteDTO;
+import com.apiREST.API.DTOs.NuevoClienteDTO;
 import com.apiREST.API.Enums.Rol;
 import com.apiREST.API.Models.*;
 import com.apiREST.API.Services.ClienteServiceImpl;
@@ -10,7 +12,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.Date;
-import java.util.List;
 
 @RestController
 @CrossOrigin(origins = "*")

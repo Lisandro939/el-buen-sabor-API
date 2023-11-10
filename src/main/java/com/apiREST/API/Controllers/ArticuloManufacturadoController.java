@@ -28,4 +28,13 @@ public class ArticuloManufacturadoController extends BaseControllerImpl<Articulo
             return ResponseEntity.status(500).body("{\"error\":\"Error, por favor intente más tarde.\"}");
         }
     }
+
+    @GetMapping("/ranking")
+    public ResponseEntity<?> ranking(@RequestParam String producto, String desde, String hasta) {
+        try {
+            return ResponseEntity.status(200).body(servicio.ranking(producto, desde, hasta));
+        } catch (Exception e) {
+            return ResponseEntity.status(500).body(e.getMessage());
+        }
+    }
 }

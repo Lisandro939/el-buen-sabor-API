@@ -1,5 +1,6 @@
 package com.apiREST.API.Services;
 
+import com.apiREST.API.DTOs.RankingProductosDTO;
 import com.apiREST.API.Models.ArticuloManufacturado;
 import com.apiREST.API.Repositories.ArticuloManufacturadoRepository;
 import com.apiREST.API.Repositories.BaseRepository;
@@ -8,6 +9,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -36,6 +39,28 @@ public class ArticuloManufacturadoServiceImpl extends BaseServiceImpl<ArticuloMa
         try {
             Page<ArticuloManufacturado> entities = articuloManufacturadoRepository.searchPaged(filtro, pageable);
             return entities;
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        }
+    }
+
+    @Override
+    public List<RankingProductosDTO> ranking(String producto, String desde, String hasta) throws Exception {
+        try {
+            List<Object[]> entities = articuloManufacturadoRepository.ranking(producto, desde, hasta);
+            List<RankingProductosDTO> dtos = new ArrayList<>();
+
+            for (Object[] entity : entities) {
+                RankingProductosDTO dto = new RankingProductosDTO(
+                        (Long) entity[0],
+                        (String) entity[1],
+                        (BigDecimal) entity[2]
+                );
+
+                dtos.add(dto);
+            }
+
+            return dtos;
         } catch (Exception e) {
             throw new Exception(e.getMessage());
         }
