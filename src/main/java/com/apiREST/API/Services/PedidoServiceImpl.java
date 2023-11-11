@@ -2,6 +2,8 @@ package com.apiREST.API.Services;
 
 import com.apiREST.API.Enums.EstadoPedido;
 import com.apiREST.API.Enums.TipoEnvio;
+import com.apiREST.API.Models.Cliente;
+import com.apiREST.API.Models.Factura;
 import com.apiREST.API.Models.Pedido;
 import com.apiREST.API.Repositories.BaseRepository;
 import com.apiREST.API.Repositories.ClienteRepository;
@@ -14,6 +16,7 @@ import org.springframework.stereotype.Service;
 import java.util.Date;
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.stream.Collectors;
 
 @Service
 public class PedidoServiceImpl extends BaseServiceImpl<Pedido,Long> implements PedidoService {
@@ -121,6 +124,16 @@ public class PedidoServiceImpl extends BaseServiceImpl<Pedido,Long> implements P
             return pedidoRepository.obtenerMovimientosMonetarios(desde, hasta);
         } catch (Exception e) {
             throw new Exception("Error al obtener movimientos monetarios: " + e.getMessage());
+        }
+    }
+
+    @Override
+    public List<Pedido> obtenerPedidosPorEstado(EstadoPedido estado) throws Exception {
+        try {
+
+            return pedidoRepository.findByEstado(estado);
+        } catch (Exception e) {
+            throw new Exception("Error al obtener pedidos por estado: " + e.getMessage());
         }
     }
 
