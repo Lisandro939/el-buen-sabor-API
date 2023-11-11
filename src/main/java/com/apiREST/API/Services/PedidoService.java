@@ -1,8 +1,13 @@
 package com.apiREST.API.Services;
 
+import com.apiREST.API.DTOs.HistorialPedidoDTO;
 import com.apiREST.API.Enums.EstadoPedido;
 import com.apiREST.API.Enums.TipoEnvio;
+import com.apiREST.API.Models.Cliente;
+import com.apiREST.API.Models.Factura;
 import com.apiREST.API.Models.Pedido;
+import com.apiREST.API.Repositories.PedidoRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -30,4 +35,6 @@ public interface PedidoService extends BaseService<Pedido, Long> {
     Pedido obtenerPedidoPorNumero(int numero) throws Exception;
 
     List<Object[]> obtenerMovimientosMonetarios(String desde, String hasta) throws Exception;
+
+    List<Pedido> obtenerPedidosPorEstado(EstadoPedido estado) throws Exception;
 }
