@@ -142,4 +142,13 @@ public class ClienteController extends BaseControllerImpl<Cliente, ClienteServic
             return ResponseEntity.status(500).body(e.getMessage());
         }
     }
+
+    @GetMapping("/ranking")
+    public ResponseEntity<?> rankingClientes(@RequestParam String rubro, @RequestParam String desde, @RequestParam String hasta) {
+        try {
+            return ResponseEntity.status(200).body(servicio.rankingClientes(rubro, desde, hasta));
+        } catch (Exception e) {
+            return ResponseEntity.status(500).body(e.getMessage());
+        }
+    }
 }
