@@ -1,17 +1,15 @@
-package com.apiREST.API.Controllers;
+package com.apiREST.API.DTOs.Controllers;
 
-import com.apiREST.API.Models.Cliente;
-import com.apiREST.API.Models.Empleado;
-import com.apiREST.API.Services.ClienteServiceImpl;
-import com.apiREST.API.Services.EmpleadoServiceImpl;
+import com.apiREST.API.Models.Domicilio;
+import com.apiREST.API.Services.DomicilioServiceImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @CrossOrigin(origins = "*")
-@RequestMapping(path = "api/v1/empleados")
-public class EmpleadoController extends BaseControllerImpl<Empleado, EmpleadoServiceImpl> {
+@RequestMapping(path = "api/v1/domicilios")
+public class DomicilioController extends BaseControllerImpl<Domicilio, DomicilioServiceImpl> {
 
     @GetMapping("/search")
     public ResponseEntity<?> search(@RequestParam String filtro) {

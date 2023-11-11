@@ -1,6 +1,7 @@
 package com.apiREST.API.Repositories;
 
 import com.apiREST.API.Models.Cliente;
+import com.apiREST.API.Models.Pedido;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Query;
@@ -59,4 +60,5 @@ public interface ClienteRepository extends BaseRepository<Cliente, Long> {
             "ORDER BY\n" +
             "    cantidad_total_comprada DESC;", nativeQuery = true)
     List<Object[]> rankingClientes(String rubro, String desde, String hasta);
+
 }

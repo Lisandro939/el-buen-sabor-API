@@ -1,7 +1,8 @@
-package com.apiREST.API.Controllers;
+package com.apiREST.API.DTOs.Controllers;
 
 
 import com.apiREST.API.DTOs.HistorialPedidoDTO;
+import com.apiREST.API.DTOs.MovimientosMonetariosDTO;
 import com.apiREST.API.Enums.EstadoPedido;
 import com.apiREST.API.Enums.TipoEnvio;
 import com.apiREST.API.Models.*;
@@ -103,6 +104,7 @@ public class PedidoController extends BaseControllerImpl<Pedido, PedidoServiceIm
     @Autowired
     DetallePedidoService detallePedidoService;
 
+    // Buscar historial de pedidos de un cliente
     @GetMapping("/searchHistorial")
     public ResponseEntity<?> obtenerPedidosPorClienteId(@RequestParam Long clienteId) {
         try{
@@ -200,4 +202,20 @@ public class PedidoController extends BaseControllerImpl<Pedido, PedidoServiceIm
         }
     }
 
+    @GetMapping("/searchMovimientosMonetarios")
+    public ResponseEntity<?> obtenerMovimientosMonetarios(@RequestParam String desde, @RequestParam String hasta){
+        try {
+            List<Object[]> movimientosMonetarios = pedidoService.obtenerMovimientosMonetarios(desde, hasta);
+
+            MovimientosMonetariosDTO movimientosMonetariosDTO = new MovimientosMonetariosDTO();
+            System.out.println(movimientosMonetarios);
+            movimientosMonetariosDTO.setTotalIngresos((Double) movimientosMonetarios.get(0)[0]);
+            movimientosMonetariosDTO.setCostos((Double) movimientosMonetarios.get(0)[1]);
+            movimientosMonetariosDTO.setGanancia((Double) movimientosMonetarios.get(0)[2]);
+
+            return ResponseEntity.status(200).body(movimientosMonetariosDTO);
+        } catch (Exception e) {
+            return ResponseEntity.status(500).body(e.getMessage());
+        }
+    }
 }

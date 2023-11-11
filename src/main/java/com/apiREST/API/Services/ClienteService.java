@@ -19,4 +19,5 @@ public interface ClienteService extends BaseService<Cliente, Long> {
 
     List<RankingClientesDTO> rankingClientes(String rubro, String desde, String hasta) throws Exception;
 
+
 }
