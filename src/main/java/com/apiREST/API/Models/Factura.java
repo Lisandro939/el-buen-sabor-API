@@ -37,6 +37,11 @@ public class Factura extends BaseEntidad {
     @Builder.Default
     private List<DetalleFactura> detalleFactura = new ArrayList<>();
 
+    @OneToOne(cascade= CascadeType.ALL, orphanRemoval = true, fetch= FetchType.EAGER)
+    @JoinColumn(name = "notaCredito_id", referencedColumnName = "id", nullable = true)
+    @Builder.Default
+    private NotaCredito notaCredito = new NotaCredito();
+
     public void agregarDetalleFactura(DetalleFactura detalleFactura) {
         this.detalleFactura.add(detalleFactura);
     }
