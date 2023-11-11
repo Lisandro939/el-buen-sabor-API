@@ -3,6 +3,7 @@ package com.apiREST.API.Controllers;
 
 import com.apiREST.API.DTOs.HistorialPedidoDTO;
 import com.apiREST.API.DTOs.MovimientosMonetariosDTO;
+import com.apiREST.API.DTOs.PedidoAPrepararDTO;
 import com.apiREST.API.Enums.EstadoPedido;
 import com.apiREST.API.Enums.TipoEnvio;
 import com.apiREST.API.Models.*;
@@ -182,7 +183,6 @@ public class PedidoController extends BaseControllerImpl<Pedido, PedidoServiceIm
             historialPedidoDTO.setTotal(pedido.getTotal());
             historialPedidoDTO.setTipoEnvio(pedido.getTipoEnvio());
 
-
             HistorialPedidoDTO.HistorialFacturaDTO historialFacturaDTO = new HistorialPedidoDTO.HistorialFacturaDTO();
 
             Factura factura = pedido.getFactura();
@@ -218,4 +218,72 @@ public class PedidoController extends BaseControllerImpl<Pedido, PedidoServiceIm
             return ResponseEntity.status(500).body(e.getMessage());
         }
     }
+
+
+    //Vista de pedidos en cocina (cocinero)
+    @GetMapping("/searchVistaPedido")
+    public ResponseEntity<?> obtenerVistaPedido(){
+        try {
+            EstadoPedido estado = EstadoPedido.EnCocina;
+
+            List<Pedido> pedidosEnCocina = pedidoService.obtenerPedidosPorEstado(estado);
+            List<PedidoAPrepararDTO> pedidoAPrepararDTOS = new ArrayList<>();
+
+            for(Pedido pedido : pedidosEnCocina) {
+                // Crear DTO para los pedidos
+                PedidoAPrepararDTO pedidoAPrepararDTO = new PedidoAPrepararDTO();
+                pedidoAPrepararDTO.setNumero(pedido.getNumero());
+                pedidoAPrepararDTO.setFecha(pedido.getFecha());
+                pedidoAPrepararDTO.setHoraEstimadaFin(pedido.getHoraEstimadaFin());
+
+                pedidoAPrepararDTOS.add(pedidoAPrepararDTO);
+            }
+            return ResponseEntity.status(200).body(pedidoAPrepararDTOS);
+
+        } catch (Exception e) {
+            return ResponseEntity.status(500).body(e.getMessage());
+        }
+    }
+
+    @GetMapping("/detailCook")
+    public ResponseEntity<?> detallePedidoEnCocina() {
+        try {
+            EstadoPedido estado = EstadoPedido.EnCocina;
+            List<Pedido> pedidosEnCocina = pedidoService.obtenerPedidosPorEstado(estado);
+
+            List<PedidoAPrepararDTO> pedidoAPrepararDTOS = new ArrayList<>();
+
+            for (Pedido pedido : pedidosEnCocina) {
+                // Crear DTO para los pedidos
+                PedidoAPrepararDTO pedidoAPrepararDTO = new PedidoAPrepararDTO();
+                pedidoAPrepararDTO.setNumero(pedido.getNumero());
+                pedidoAPrepararDTO.setFecha(pedido.getFecha());
+                pedidoAPrepararDTO.setHoraEstimadaFin(pedido.getHoraEstimadaFin());
+
+                List<DetallePedido> detallesPedido = pedido.getDetallePedido();
+                List<PedidoAPrepararDTO.DetallePedidoAPrepararDTO> detallePedidosAPreparar = new ArrayList<>();
+
+                for (DetallePedido detalle : detallesPedido) {
+                    PedidoAPrepararDTO.DetallePedidoAPrepararDTO detallePedidoAPrepararDTO = new PedidoAPrepararDTO.DetallePedidoAPrepararDTO();
+                    detallePedidoAPrepararDTO.setCantidad(detalle.getCantidad());
+                    ArticuloManufacturado articuloManufacturado = detalle.getArticuloManufacturado();
+                    detallePedidoAPrepararDTO.setDenominacion(articuloManufacturado.getDenominacion());
+                    detallePedidoAPrepararDTO.setReceta(articuloManufacturado.getReceta());
+                    detallePedidoAPrepararDTO.setTiempoEstimadoCocina(articuloManufacturado.getTiempoEstimadoCocina());
+
+                    detallePedidosAPreparar.add(detallePedidoAPrepararDTO);
+                }
+
+                pedidoAPrepararDTO.setDetallePedidosAPreparar(detallePedidosAPreparar);
+                pedidoAPrepararDTOS.add(pedidoAPrepararDTO);
+            }
+
+            return ResponseEntity.status(200).body(pedidoAPrepararDTOS);
+        } catch (Exception e) {
+            return ResponseEntity.status(500).body(e.getMessage());
+        }
+    }
+
+
+
 }
