@@ -1,7 +1,6 @@
 package com.apiREST.API.Models;
 
 import com.apiREST.API.Enums.EstadoMercadoPago;
-import com.apiREST.API.Enums.EstadoPedido;
 import com.apiREST.API.Enums.FormaPago;
 import com.apiREST.API.Enums.MetodoPago;
 import jakarta.persistence.*;

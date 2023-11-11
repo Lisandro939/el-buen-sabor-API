@@ -17,4 +17,7 @@ public interface UsuarioRepository extends BaseRepository<Usuario, Long> {
     @Query(value = "SELECT * FROM usuario WHERE usuario LIKE %?1%", nativeQuery = true)
     Page<Usuario> searchPaged(String filtro, Pageable pageable);
 
+    @Query(value = "SELECT * FROM usuario WHERE usuario = ?1", nativeQuery = true)
+    Usuario findByUsername(String usuario);
+
 }

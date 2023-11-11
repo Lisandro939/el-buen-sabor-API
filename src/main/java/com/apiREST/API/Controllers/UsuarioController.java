@@ -1,15 +1,15 @@
-package com.apiREST.API.DTOs.Controllers;
+package com.apiREST.API.Controllers;
 
-import com.apiREST.API.Models.MercadoPagoDatos;
-import com.apiREST.API.Services.MercadoPagoDatosServiceImpl;
+import com.apiREST.API.Models.Usuario;
+import com.apiREST.API.Services.UsuarioServiceImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @CrossOrigin(origins = "*")
-@RequestMapping(path = "api/v1/mercadoPagoDatos")
-public class MercadoPagoDatosController extends BaseControllerImpl<MercadoPagoDatos, MercadoPagoDatosServiceImpl> {
+@RequestMapping(path = "api/v1/usuarios")
+public class UsuarioController extends BaseControllerImpl<Usuario, UsuarioServiceImpl> {
 
     @GetMapping("/search")
     public ResponseEntity<?> search(@RequestParam String filtro) {

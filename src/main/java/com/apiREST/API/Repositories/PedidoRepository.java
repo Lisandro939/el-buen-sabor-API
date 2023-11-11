@@ -1,9 +1,7 @@
 package com.apiREST.API.Repositories;
 
-import com.apiREST.API.DTOs.MovimientosMonetariosDTO;
 import com.apiREST.API.Enums.EstadoPedido;
 import com.apiREST.API.Enums.TipoEnvio;
-import com.apiREST.API.Models.Cliente;
 import com.apiREST.API.Models.Pedido;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

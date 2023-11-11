@@ -2,8 +2,6 @@ package com.apiREST.API.Services;
 
 import com.apiREST.API.Enums.EstadoPedido;
 import com.apiREST.API.Enums.TipoEnvio;
-import com.apiREST.API.Models.Cliente;
-import com.apiREST.API.Models.Factura;
 import com.apiREST.API.Models.Pedido;
 import com.apiREST.API.Repositories.BaseRepository;
 import com.apiREST.API.Repositories.ClienteRepository;

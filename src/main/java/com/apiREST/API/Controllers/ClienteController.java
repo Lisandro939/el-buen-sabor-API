@@ -1,4 +1,4 @@
-package com.apiREST.API.DTOs.Controllers;
+package com.apiREST.API.Controllers;
 
 import com.apiREST.API.DTOs.DatosClienteDTO;
 import com.apiREST.API.DTOs.NuevoClienteDTO;

@@ -2,10 +2,6 @@ package com.apiREST.API.DTOs;
 
 import com.apiREST.API.Enums.FormaPago;
 import com.apiREST.API.Enums.TipoEnvio;
-import com.apiREST.API.Models.BaseEntidad;
-import jakarta.persistence.Column;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

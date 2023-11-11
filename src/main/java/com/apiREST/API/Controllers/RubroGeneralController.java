@@ -1,4 +1,4 @@
-package com.apiREST.API.DTOs.Controllers;
+package com.apiREST.API.Controllers;
 
 import com.apiREST.API.Models.RubroGeneral;
 import com.apiREST.API.Services.RubroGeneralServiceImpl;

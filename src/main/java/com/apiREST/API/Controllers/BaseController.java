@@ -1,4 +1,4 @@
-package com.apiREST.API.DTOs.Controllers;
+package com.apiREST.API.Controllers;
 
 import com.apiREST.API.Models.BaseEntidad;
 import org.springframework.data.domain.Pageable;

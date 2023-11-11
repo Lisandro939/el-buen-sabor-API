@@ -1,15 +1,15 @@
-package com.apiREST.API.DTOs.Controllers;
+package com.apiREST.API.Controllers;
 
-import com.apiREST.API.Models.ArticuloInsumo;
-import com.apiREST.API.Services.ArticuloInsumoServiceImpl;
+import com.apiREST.API.Models.ArticuloManufacturadoDetalle;
+import com.apiREST.API.Services.ArticuloManufacturadoDetalleServiceImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @CrossOrigin(origins = "*")
-@RequestMapping(path = "api/v1/articulosInsumos")
-public class ArticuloInsumoController extends BaseControllerImpl<ArticuloInsumo, ArticuloInsumoServiceImpl> {
+@RequestMapping(path = "api/v1/articulosManufacturadosDetalle")
+public class ArticuloManufacturadoDetalleController extends BaseControllerImpl<ArticuloManufacturadoDetalle, ArticuloManufacturadoDetalleServiceImpl> {
 
     @GetMapping("/search")
     public ResponseEntity<?> search(@RequestParam String filtro) {

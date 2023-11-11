@@ -1,4 +1,4 @@
-package com.apiREST.API.DTOs.Controllers;
+package com.apiREST.API.Controllers;
 
 import com.apiREST.API.Models.Domicilio;
 import com.apiREST.API.Services.DomicilioServiceImpl;

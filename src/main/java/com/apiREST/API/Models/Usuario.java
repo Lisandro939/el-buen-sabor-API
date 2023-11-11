@@ -23,5 +23,4 @@ public class Usuario extends BaseEntidad {
     @Column(name = "rol", length = 50, nullable = false)
     @Enumerated(EnumType.STRING)
     private Rol rol;
-
 }
