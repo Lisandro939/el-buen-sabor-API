@@ -17,6 +17,7 @@ public class ArticuloManufacturado extends BaseEntidad {
     private int tiempoEstimadoCocina;
     private String denominacion;
     private double precioVenta;
+    private String receta;
     private String imagen;
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
