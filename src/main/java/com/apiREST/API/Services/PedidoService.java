@@ -34,8 +34,5 @@ public interface PedidoService extends BaseService<Pedido, Long> {
 
     Pedido obtenerPedidoPorNumero(int numero) throws Exception;
 
-
-
-
-
+    List<Object[]> obtenerMovimientosMonetarios(String desde, String hasta) throws Exception;
 }

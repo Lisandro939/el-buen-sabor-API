@@ -117,6 +117,13 @@ public class PedidoServiceImpl extends BaseServiceImpl<Pedido,Long> implements P
         }
     }
 
-
+    @Override
+    public List<Object[]> obtenerMovimientosMonetarios(String desde, String hasta) throws Exception {
+        try {
+            return pedidoRepository.obtenerMovimientosMonetarios(desde, hasta);
+        } catch (Exception e) {
+            throw new Exception("Error al obtener movimientos monetarios: " + e.getMessage());
+        }
+    }
 
 }

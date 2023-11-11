@@ -1,5 +1,6 @@
 package com.apiREST.API.Repositories;
 
+import com.apiREST.API.DTOs.MovimientosMonetariosDTO;
 import com.apiREST.API.Enums.EstadoPedido;
 import com.apiREST.API.Enums.TipoEnvio;
 import com.apiREST.API.Models.Cliente;
@@ -57,4 +58,14 @@ public interface PedidoRepository extends BaseRepository<Pedido, Long> {
             "LEFT JOIN articulo_manufacturado a ON d.articulo_manufacturado_id = a.id " +
             "WHERE p.numero = :numero", nativeQuery = true)
     List<Object[]> obtenerHistorialPedidoDTO(@Param("numero") int numero);
+
+    @Query(value = "SELECT \n" +
+            "    SUM(dp.cantidad * am.precio_venta) AS total_ingresos,\n" +
+            "    SUM(dp.cantidad * am.precio_costo) AS costos,\n" +
+            "    SUM(dp.cantidad * (am.precio_venta - am.precio_costo)) AS ganancia\n" +
+            "FROM detalle_pedido dp\n" +
+            "JOIN articulo_manufacturado am ON dp.articulo_manufacturado_id = am.id\n" +
+            "JOIN pedido p ON dp.datelle_pedido_id = p.id\n" +
+            "WHERE p.fecha BETWEEN :desde AND :hasta ;", nativeQuery = true)
+    List<Object[]> obtenerMovimientosMonetarios(@Param("desde") String desde, @Param("hasta") String hasta);
 }
