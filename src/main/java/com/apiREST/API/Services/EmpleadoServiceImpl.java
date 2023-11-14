@@ -48,7 +48,7 @@ public class EmpleadoServiceImpl extends BaseServiceImpl<Empleado,Long> implemen
             List<Empleado> entities = empleadoRepository.obtenerListaEmpleado();
             return entities;
         } catch (Exception e) {
-            throw new Exception(e.getMessage());
+            throw new Exception("Error al obtener los Empleados: " + e.getMessage());
         }
     }
 
