@@ -1,10 +1,10 @@
 package com.apiREST.API.Controllers;
 
 
+import com.apiREST.API.DTOs.DTOEntregaDelivery;
 import com.apiREST.API.DTOs.HistorialPedidoDTO;
 import com.apiREST.API.DTOs.MovimientosMonetariosDTO;
 import com.apiREST.API.DTOs.PedidoAPrepararDTO;
-import com.apiREST.API.DTOs.PedidoEnDeliveyDTO;
 import com.apiREST.API.Enums.EstadoPedido;
 import com.apiREST.API.Enums.TipoEnvio;
 import com.apiREST.API.Models.*;
@@ -285,38 +285,43 @@ public class PedidoController extends BaseControllerImpl<Pedido, PedidoServiceIm
         }
     }
 
-    //Entrega de pedidos Delivery
-    @GetMapping("/delivery")
-    public ResponseEntity<?> obtenerPedidoDelivery(){
+    @GetMapping("/findByDelivery")
+    public ResponseEntity<?> findByDelivery() {
         try {
-            EstadoPedido estado = EstadoPedido.EnDelivery;
+            List<Pedido> pedidos = servicio.findByDelivery();
+            List<DTOEntregaDelivery> dtoEntregaDeliveries = new ArrayList<>();
 
-            List<Pedido> pedidosEnDelivery = pedidoService.obtenerPedidosPorEstado(estado);
-            List<PedidoEnDeliveyDTO> pedidoEnDeliveyDTOS = new ArrayList<>();
+            for (Pedido pedido: pedidos){
+                DTOEntregaDelivery dtoEntregaDelivery = new DTOEntregaDelivery();
+                dtoEntregaDelivery.setNumeroPedido(pedido.getNumero());
+                dtoEntregaDelivery.setFecha(pedido.getFecha());
+                dtoEntregaDelivery.setCliente(pedido.getCliente().getNombre());
+                dtoEntregaDelivery.setCalle(pedido.getDomicilio().getCalle());
+                dtoEntregaDelivery.setLocalidad(pedido.getDomicilio().getLocalidad());
+                dtoEntregaDelivery.setNumeroDom(pedido.getDomicilio().getNumero());
 
 
-            for(Pedido pedido : pedidosEnDelivery) {
+                List<DetallePedido> detallesPedido = pedido.getDetallePedido();
+                List<DTOEntregaDelivery.DTODetalleEntregaDelivery> detalleEntregaDeliveries = new ArrayList<>();
 
-                PedidoEnDeliveyDTO pedidoEnDeliveyDTO = new PedidoEnDeliveyDTO();
+                for (DetallePedido detalle: detallesPedido){
+                    DTOEntregaDelivery.DTODetalleEntregaDelivery dtoDetalleEntregaDelivery = new DTOEntregaDelivery.DTODetalleEntregaDelivery();
+                    dtoDetalleEntregaDelivery.setProducto(detalle.getArticuloManufacturado().getDenominacion());
+                    dtoDetalleEntregaDelivery.setCantidad(detalle.getCantidad());
+                    dtoDetalleEntregaDelivery.setPrecio(detalle.getArticuloManufacturado().getPrecioVenta());
+                    dtoDetalleEntregaDelivery.setSubtotal(detalle.getSubtotal());
+                    detalleEntregaDeliveries.add(dtoDetalleEntregaDelivery);
 
-                Cliente cliente = pedido.getCliente();
-                Domicilio domicilio = cliente.getDomicilio();
 
-                pedidoEnDeliveyDTO.setNumero(pedido.getNumero());
-                pedidoEnDeliveyDTO.setFecha(pedido.getFecha());
-                pedidoEnDeliveyDTO.setNombre(cliente.getNombre());
-                pedidoEnDeliveyDTO.setApellido(cliente.getApellido());
-                pedidoEnDeliveyDTO.setCalle(domicilio.getCalle());
-                pedidoEnDeliveyDTO.setNumeroCalle(domicilio.getNumero());
-                pedidoEnDeliveyDTO.setLocalidad(domicilio.getLocalidad());
-                pedidoEnDeliveyDTO.setTelefono(cliente.getTelefono());
-
-                pedidoEnDeliveyDTOS.add(pedidoEnDeliveyDTO);
+                }
+                dtoEntregaDelivery.setDetalleEntregaDeliveries(detalleEntregaDeliveries);
+                dtoEntregaDeliveries.add(dtoEntregaDelivery);
             }
-            return ResponseEntity.status(200).body(pedidoEnDeliveyDTOS);
+
+            return ResponseEntity.status(200).body(dtoEntregaDeliveries);
 
         } catch (Exception e) {
-            return ResponseEntity.status(500).body(e.getMessage());
+            return ResponseEntity.status(500).body("{\"error\":\"Error, por favor intente más tarde.\"}");
         }
     }
 
