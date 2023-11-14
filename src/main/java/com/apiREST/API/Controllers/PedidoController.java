@@ -4,6 +4,7 @@ package com.apiREST.API.Controllers;
 import com.apiREST.API.DTOs.HistorialPedidoDTO;
 import com.apiREST.API.DTOs.MovimientosMonetariosDTO;
 import com.apiREST.API.DTOs.PedidoAPrepararDTO;
+import com.apiREST.API.DTOs.PedidoEnDeliveyDTO;
 import com.apiREST.API.Enums.EstadoPedido;
 import com.apiREST.API.Enums.TipoEnvio;
 import com.apiREST.API.Models.*;
@@ -284,6 +285,39 @@ public class PedidoController extends BaseControllerImpl<Pedido, PedidoServiceIm
         }
     }
 
+    //Entrega de pedidos Delivery
+    @GetMapping("/delivery")
+    public ResponseEntity<?> obtenerPedidoDelivery(){
+        try {
+            EstadoPedido estado = EstadoPedido.EnDelivery;
 
+            List<Pedido> pedidosEnDelivery = pedidoService.obtenerPedidosPorEstado(estado);
+            List<PedidoEnDeliveyDTO> pedidoEnDeliveyDTOS = new ArrayList<>();
+
+
+            for(Pedido pedido : pedidosEnDelivery) {
+
+                PedidoEnDeliveyDTO pedidoEnDeliveyDTO = new PedidoEnDeliveyDTO();
+
+                Cliente cliente = pedido.getCliente();
+                Domicilio domicilio = cliente.getDomicilio();
+
+                pedidoEnDeliveyDTO.setNumero(pedido.getNumero());
+                pedidoEnDeliveyDTO.setFecha(pedido.getFecha());
+                pedidoEnDeliveyDTO.setNombre(cliente.getNombre());
+                pedidoEnDeliveyDTO.setApellido(cliente.getApellido());
+                pedidoEnDeliveyDTO.setCalle(domicilio.getCalle());
+                pedidoEnDeliveyDTO.setNumeroCalle(domicilio.getNumero());
+                pedidoEnDeliveyDTO.setLocalidad(domicilio.getLocalidad());
+                pedidoEnDeliveyDTO.setTelefono(cliente.getTelefono());
+
+                pedidoEnDeliveyDTOS.add(pedidoEnDeliveyDTO);
+            }
+            return ResponseEntity.status(200).body(pedidoEnDeliveyDTOS);
+
+        } catch (Exception e) {
+            return ResponseEntity.status(500).body(e.getMessage());
+        }
+    }
 
 }
