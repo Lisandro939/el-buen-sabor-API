@@ -15,6 +15,7 @@ import java.util.List;
 public class RubroArticulo extends BaseEntidad {
 
     private String denominacion;
+    private String estado;
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     @JoinColumn(name = "rubroArticulo_id", referencedColumnName = "id")
