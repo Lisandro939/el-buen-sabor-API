@@ -2,6 +2,7 @@ package com.apiREST.API.Services;
 
 import com.apiREST.API.DTOs.RankingClientesDTO;
 import com.apiREST.API.Models.Cliente;
+import com.apiREST.API.Models.Empleado;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -19,5 +20,6 @@ public interface ClienteService extends BaseService<Cliente, Long> {
 
     List<RankingClientesDTO> rankingClientes(String rubro, String desde, String hasta) throws Exception;
 
-
+    //Enlistar los Todos los Clientes
+    List<Cliente> obtenerListaCliente() throws Exception;
 }
