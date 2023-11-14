@@ -10,6 +10,12 @@ public interface ArticuloInsumoService extends BaseService<ArticuloInsumo, Long>
 
     List<ArticuloInsumo> search(String filtro) throws Exception;
 
+    List<ArticuloInsumo> searchByStock() throws Exception;
+
+    List<ArticuloInsumo> searchByEstado() throws Exception;
+
     Page<ArticuloInsumo> searchPaged(String filtro, Pageable pageable) throws Exception;
+
+
 
 }

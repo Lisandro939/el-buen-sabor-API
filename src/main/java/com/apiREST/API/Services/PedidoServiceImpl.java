@@ -2,6 +2,7 @@ package com.apiREST.API.Services;
 
 import com.apiREST.API.Enums.EstadoPedido;
 import com.apiREST.API.Enums.TipoEnvio;
+import com.apiREST.API.Models.ArticuloInsumo;
 import com.apiREST.API.Models.Cliente;
 import com.apiREST.API.Models.Factura;
 import com.apiREST.API.Models.Pedido;
@@ -134,6 +135,15 @@ public class PedidoServiceImpl extends BaseServiceImpl<Pedido,Long> implements P
             return pedidoRepository.findByEstado(estado);
         } catch (Exception e) {
             throw new Exception("Error al obtener pedidos por estado: " + e.getMessage());
+        }
+    }
+
+    @Override
+    public List<Pedido> findByDelivery() throws Exception{
+        try {
+            return pedidoRepository.findByDelivery();
+        } catch (Exception e){
+            throw new Exception(e.getMessage());
         }
     }
 

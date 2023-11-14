@@ -37,4 +37,6 @@ public interface PedidoService extends BaseService<Pedido, Long> {
     List<Object[]> obtenerMovimientosMonetarios(String desde, String hasta) throws Exception;
 
     List<Pedido> obtenerPedidosPorEstado(EstadoPedido estado) throws Exception;
+
+    List<Pedido> findByDelivery() throws Exception;
 }

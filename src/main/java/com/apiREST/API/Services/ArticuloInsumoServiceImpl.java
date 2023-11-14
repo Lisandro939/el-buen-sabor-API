@@ -40,4 +40,23 @@ public class ArticuloInsumoServiceImpl extends BaseServiceImpl<ArticuloInsumo,Lo
             throw new Exception(e.getMessage());
         }
     }
+
+    @Override
+    public List<ArticuloInsumo> searchByStock() throws Exception{
+        try {
+            return articuloInsumoRepository.searchByStock();
+        } catch (Exception e){
+            throw new Exception(e.getMessage());
+        }
+    }
+
+    @Override
+    public List<ArticuloInsumo> searchByEstado() throws Exception{
+        try {
+            return articuloInsumoRepository.searchByEstado();
+        } catch (Exception e){
+            throw new Exception(e.getMessage());
+        }
+    }
+
 }

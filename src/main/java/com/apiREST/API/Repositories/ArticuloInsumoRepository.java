@@ -14,4 +14,10 @@ public interface ArticuloInsumoRepository extends BaseRepository<ArticuloInsumo,
 
     @Query(value = "SELECT * FROM articulo_insumo WHERE denominacion LIKE %?1%", nativeQuery = true)
     Page<ArticuloInsumo> searchPaged(String filtro, Pageable pageable);
+
+    @Query(value = "SELECT * FROM articulo_insumo where stock_actual < stock_minimo", nativeQuery = true)
+    List<ArticuloInsumo> searchByStock();
+
+    @Query(value = "SELECT * FROM articulo_insumo where estado = 'alta' ", nativeQuery = true)
+    List<ArticuloInsumo> searchByEstado();
 }
