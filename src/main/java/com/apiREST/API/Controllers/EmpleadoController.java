@@ -1,7 +1,9 @@
 package com.apiREST.API.Controllers;
 
+import com.apiREST.API.DTOs.DatosClienteDTO;
 import com.apiREST.API.DTOs.EmpleadoDTO;
 import com.apiREST.API.DTOs.NuevoEmpleadoDTO;
+import com.apiREST.API.Models.Cliente;
 import com.apiREST.API.Models.Domicilio;
 import com.apiREST.API.Models.Empleado;
 import com.apiREST.API.Models.Usuario;
@@ -101,4 +103,35 @@ public class EmpleadoController extends BaseControllerImpl<Empleado, EmpleadoSer
             return ResponseEntity.status(500).body(e.getMessage());
         }
     }
+
+    @GetMapping("/login")
+    public ResponseEntity<?> login(@RequestParam String email, @RequestParam String clave) {
+        try {
+            return ResponseEntity.status(200).body(servicio.login(email, clave));
+        } catch (Exception e) {
+            return ResponseEntity.status(500).body(e.getMessage());
+        }
+    }
+    @GetMapping("/datos")
+        public ResponseEntity<?> datosEmpleado(@RequestParam String email) {
+        try {
+            Empleado empleado = servicio.findByEmail(email);
+
+            EmpleadoDTO empleadoDTO = new EmpleadoDTO();
+
+            empleadoDTO.setNombre(empleado.getNombre());
+            empleadoDTO.setApellido(empleado.getApellido());
+            empleadoDTO.setTelefono(empleado.getTelefono());
+            empleadoDTO.setEmail(empleado.getEmail());
+            empleadoDTO.setCalle(empleado.getDomicilio().getCalle());
+            empleadoDTO.setNumero(empleado.getDomicilio().getNumero());
+            empleadoDTO.setLocalidad(empleado.getDomicilio().getLocalidad());
+            empleadoDTO.setRol(empleado.getUsuario().getRol());
+            empleadoDTO.setEstado(empleadoDTO.getEstado());
+            return ResponseEntity.status(200).body(empleadoDTO);
+        } catch (Exception e) {
+            return ResponseEntity.status(500).body(e.getMessage());
+        }
+    }
 }
+

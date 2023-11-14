@@ -23,9 +23,9 @@ public class EmpleadoServiceImpl extends BaseServiceImpl<Empleado,Long> implemen
     }
 
     @Override
-    public List<Cliente> search(String filtro) throws Exception {
+    public List<Empleado> search(String filtro) throws Exception {
         try {
-            List<Cliente> entities = empleadoRepository.search(filtro);
+            List<Empleado> entities = empleadoRepository.search(filtro);
             return entities;
         } catch (Exception e) {
             throw new Exception(e.getMessage());
@@ -33,9 +33,9 @@ public class EmpleadoServiceImpl extends BaseServiceImpl<Empleado,Long> implemen
     }
 
     @Override
-    public Page<Cliente> searchPaged(String filtro, Pageable pageable) throws Exception {
+    public Page<Empleado> searchPaged(String filtro, Pageable pageable) throws Exception {
         try {
-            Page<Cliente> entities = empleadoRepository.searchPaged(filtro, pageable);
+            Page<Empleado> entities = empleadoRepository.searchPaged(filtro, pageable);
             return entities;
         } catch (Exception e) {
             throw new Exception(e.getMessage());
@@ -47,6 +47,35 @@ public class EmpleadoServiceImpl extends BaseServiceImpl<Empleado,Long> implemen
         try {
             List<Empleado> entities = empleadoRepository.obtenerListaEmpleado();
             return entities;
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        }
+    }
+
+    @Override
+    public String login(String email, String clave) throws Exception {
+        try {
+            Empleado empleado = empleadoRepository.login(email, clave);
+            if (empleado == null) {
+                String jsonResponseFalse = "{\"login\": false}";
+                return jsonResponseFalse;
+            } else if (empleado.getFechaBaja() != null) {
+                String jsonResponseFechaBaja = "{\"login\": empleado dado de baja}";
+                return jsonResponseFechaBaja;
+            } else {
+                String jsonResponseTrue = "{\"login\": true}";
+                return jsonResponseTrue;
+            }
+        } catch (Exception e) {
+            throw new Exception("{ \"response\": \"" + e.getMessage() + "\" }");
+        }
+    }
+
+    @Override
+    public Empleado findByEmail(String email) throws Exception {
+        try {
+            Empleado empleado = empleadoRepository.findByEmail(email);
+            return empleado;
         } catch (Exception e) {
             throw new Exception(e.getMessage());
         }
