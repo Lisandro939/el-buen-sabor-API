@@ -1,9 +1,12 @@
 package com.apiREST.API.Controllers;
 
 import com.apiREST.API.DTOs.DatosClienteDTO;
+import com.apiREST.API.DTOs.ListaClienteDTO;
+import com.apiREST.API.DTOs.ListaEmpleadoDTO;
 import com.apiREST.API.DTOs.NuevoClienteDTO;
 import com.apiREST.API.Enums.Rol;
 import com.apiREST.API.Models.*;
+import com.apiREST.API.Services.ClienteService;
 import com.apiREST.API.Services.ClienteServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
@@ -12,6 +15,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 @CrossOrigin(origins = "*")
@@ -148,6 +153,35 @@ public class ClienteController extends BaseControllerImpl<Cliente, ClienteServic
         try {
             return ResponseEntity.status(200).body(servicio.rankingClientes(rubro, desde, hasta));
         } catch (Exception e) {
+            return ResponseEntity.status(500).body(e.getMessage());
+        }
+    }
+
+    //Enlistar todos los Clientes
+    @Autowired
+    ClienteService clienteService;
+    @GetMapping("/listaClientes")
+    public ResponseEntity<?> obtenerListaClientes(){
+        try {
+            List<Cliente> clientes = clienteService.obtenerListaCliente();
+            List<ListaClienteDTO> listaClientesDTO = new ArrayList<>();
+
+            for(Cliente cliente : clientes){
+                ListaClienteDTO listaClienteDTO = new ListaClienteDTO.builder()
+                    .nombre(cliente.getNombre())
+                    .apellido(cliente.getApellido())
+                    .email(cliente.getEmail())
+                    .telefono(cliente.getTelefono())
+                    .calle(cliente.getDomicilio.getCalle())
+                    .numero(cliente.getDomicilio.getNumero())
+                    .localiad(cliente.getDomicilio.getLocalidad())
+                        .build();
+                //Estado Cliente
+
+                listaClienteDTO.add(listaClienteDTO);
+            }
+            return ResponseEntity.status(200).body(listaClientesDTO);
+        }catch (Exception e){
             return ResponseEntity.status(500).body(e.getMessage());
         }
     }
