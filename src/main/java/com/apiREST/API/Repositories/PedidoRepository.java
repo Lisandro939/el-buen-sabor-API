@@ -71,4 +71,7 @@ public interface PedidoRepository extends BaseRepository<Pedido, Long> {
 
     @Query("SELECT p FROM Pedido p WHERE p.estado = :estado")
     List<Pedido> findByEstado(@Param("estado") EstadoPedido estado);
+
+    @Query(value = "SELECT * FROM pedido  WHERE estado = 'Listo' AND tipo_envio = 'Delivery'", nativeQuery = true)
+    List<Pedido> findByDelivery();
 }
