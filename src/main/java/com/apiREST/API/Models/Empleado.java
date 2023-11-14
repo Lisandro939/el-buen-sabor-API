@@ -6,12 +6,14 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.sql.Date;
+
 @Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Table(name = "articuloManufacturadoDetalle")
+@Table(name = "empleado")
 public class Empleado extends BaseEntidad {
 
     @Column(name = "nombre", length = 50, nullable = false)
@@ -25,6 +27,9 @@ public class Empleado extends BaseEntidad {
 
     @Column(name = "email", length = 50, nullable = false)
     private String email;
+
+    @Column(name = "fecha_baja", length = 50, nullable = true)
+    private Date fechaBaja;
 
     @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     @JoinColumn(name = "domicilio_id", referencedColumnName = "id")

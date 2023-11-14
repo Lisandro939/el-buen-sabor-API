@@ -3,6 +3,7 @@ package com.apiREST.API.Models;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,11 +15,19 @@ import java.util.List;
 @Table(name = "articuloManufacturado")
 public class ArticuloManufacturado extends BaseEntidad {
 
-    private int tiempoEstimadoCocina;
+
     private String denominacion;
     private double precioVenta;
+    private double precioCosto;
+    private int tiempoEstimadoCocina;
     private String receta;
     private String imagen;
+    private int stockMinimo;
+    private int stockActual;
+    private String unidadMedida;
+
+    @Column(name = "fecha_baja", length = 50, nullable = true)
+    private Date fechaBaja;
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     @JoinColumn(name = "articuloManufacturadoDetalle_id", referencedColumnName = "id")

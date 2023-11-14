@@ -41,4 +41,14 @@ public class EmpleadoServiceImpl extends BaseServiceImpl<Empleado,Long> implemen
             throw new Exception(e.getMessage());
         }
     }
+
+    @Override
+    public List<Empleado> obtenerListaEmpleado() throws Exception {
+        try {
+            List<Empleado> entities = empleadoRepository.obtenerListaEmpleado();
+            return entities;
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        }
+    }
 }

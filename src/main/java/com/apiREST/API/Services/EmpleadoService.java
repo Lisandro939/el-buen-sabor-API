@@ -13,4 +13,6 @@ public interface EmpleadoService extends BaseService<Empleado, Long> {
 
     Page<Cliente> searchPaged(String filtro, Pageable pageable) throws Exception;
 
+    List<Empleado> obtenerListaEmpleado() throws Exception;
+
 }

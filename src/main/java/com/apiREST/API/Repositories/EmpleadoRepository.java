@@ -18,5 +18,7 @@ public interface EmpleadoRepository extends BaseRepository<Empleado, Long> {
     @Query(value = "SELECT * FROM empleado WHERE nombre LIKE %?1%", nativeQuery = true)
     Page<Cliente> searchPaged(String filtro, Pageable pageable);
 
+    @Query(value = "SELECT * FROM empleado;", nativeQuery = true)
+    List<Empleado> obtenerListaEmpleado();
 
 }
