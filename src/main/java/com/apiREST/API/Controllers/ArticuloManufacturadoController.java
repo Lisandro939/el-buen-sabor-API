@@ -1,8 +1,11 @@
 package com.apiREST.API.Controllers;
 
+import com.apiREST.API.DTOs.ProductoDTO;
 import com.apiREST.API.Models.ArticuloManufacturado;
+import com.apiREST.API.Models.RubroGeneral;
 import com.apiREST.API.Services.ArticuloManufacturadoServiceImpl;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -37,4 +40,30 @@ public class ArticuloManufacturadoController extends BaseControllerImpl<Articulo
             return ResponseEntity.status(500).body(e.getMessage());
         }
     }
+
+    @GetMapping("/newProduct")
+    public ResponseEntity<?> newProduct(@RequestParam ProductoDTO productoDTO){
+        try {
+            ArticuloManufacturado articulomanufacturado = new ArticuloManufacturado();
+
+            //Cargamos los datos al nuevo articuloManufacturado
+            articulomanufacturado.setDenominacion(productoDTO.getProducto());
+            articulomanufacturado.setStockMinimo(productoDTO.getStockMinimo());
+            articulomanufacturado.setStockActual(productoDTO.getStockActual());
+            articulomanufacturado.setPrecioCosto(productoDTO.getPrecioDeCosto());
+            //Cargamos el Rubro
+            RubroGeneral rubroGeneral = new RubroGeneral();
+
+            rubroGeneral.setDenominacion(productoDTO.getRubro());
+
+            //le asociamos el rubro a el articuloManufacturado
+            articulomanufacturado.setRubroGeneral(rubroGeneral);
+
+            return new ResponseEntity<>("articulo creado exitosamente", HttpStatus.CREATED);
+
+        } catch (Exception e){
+            return ResponseEntity.status(500).body(e.getMessage());
+        }
+    }
+
 }
