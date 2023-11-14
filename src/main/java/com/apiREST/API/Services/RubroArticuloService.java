@@ -12,4 +12,6 @@ public interface RubroArticuloService extends BaseService<RubroArticulo, Long> {
 
     Page<RubroArticulo> searchPaged(String filtro, Pageable pageable) throws Exception;
 
+
+
 }
