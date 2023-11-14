@@ -16,4 +16,5 @@ public interface ArticuloManufacturadoService extends BaseService<ArticuloManufa
 
     List<RankingProductosDTO> ranking(String producto, String desde, String hasta) throws Exception;
 
+    ArticuloManufacturado findByName(String denominacion) throws Exception;
 }

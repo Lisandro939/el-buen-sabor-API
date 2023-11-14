@@ -45,6 +45,18 @@ public class ArticuloManufacturadoServiceImpl extends BaseServiceImpl<ArticuloMa
     }
 
     @Override
+    public ArticuloManufacturado findByName(String denominacion) throws Exception{
+        try{
+
+            ArticuloManufacturado articuloManufacturado= articuloManufacturadoRepository.findByName(denominacion);
+            return articuloManufacturado;
+
+        }catch(Exception e){
+            throw new Exception(e.getMessage());
+        }
+    }
+
+    @Override
     public List<RankingProductosDTO> ranking(String producto, String desde, String hasta) throws Exception {
         try {
             List<Object[]> entities = articuloManufacturadoRepository.ranking(producto, desde, hasta);
