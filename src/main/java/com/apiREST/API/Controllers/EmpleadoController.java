@@ -36,14 +36,11 @@ public class EmpleadoController extends BaseControllerImpl<Empleado, EmpleadoSer
                 listaEmpleadoDTO.setCalle(empleado.getDomicilio().getCalle());
                 listaEmpleadoDTO.setNumero(empleado.getDomicilio().getNumero());
                 listaEmpleadoDTO.setLocalidad(empleado.getDomicilio().getLocalidad());
-                // Assuming setEstado is a method in ListaEmpleadoDTO
                 if (empleado.getFechaBaja() != null) {
                     listaEmpleadoDTO.setEstado("Baja");
                 } else {
                     listaEmpleadoDTO.setEstado("Alta");
                 }
-
-                // Add the populated ListaEmpleadoDTO to the list
                 listaEmpleadosDTO.add(listaEmpleadoDTO);
             }
 
