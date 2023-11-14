@@ -99,31 +99,5 @@ public class EmpleadoController extends BaseControllerImpl<Empleado, EmpleadoSer
         }
     }
     
-    @GetMapping("/listaEmpleados")
-    public ResponseEntity<?> obtenerListaEmpleados() {
-        try {
-            List<Empleado> empleados = empleadoService.obtenerListaEmpleado();
-            List<ListaEmpleadoDTO> listaEmpleadosDTO = new ArrayList<>();
-
-            for (Empleado empleado : empleados) {
-                ListaEmpleadoDTO listaEmpleadoDTO = ListaEmpleadoDTO.builder()
-                        .nombre(empleado.getNombre())
-                        .apellido(empleado.getApellido())
-                        .rol(empleado.getUsuario.getRol())
-                        .email(empleado.getEmail())
-                        .telefono(empleado.getTelefono())
-                        .calle(empleado.getDomicilio.getCalle())
-                        .numero(empleado.getDomicilio.getNumero())
-                        .localidad(empleado.getDomicilio.getLocalidad())
-                        .estado(empleado.getEstado())
-                        .build();
-
-                listaEmpleadosDTO.add(listaEmpleadoDTO);
-            }
-
-            return ResponseEntity.status(200).body(listaEmpleadosDTO);
-        } catch (Exception e) {
-            return ResponseEntity.status(500).body(e.getMessage());
-        }
-    }
+   
 }
