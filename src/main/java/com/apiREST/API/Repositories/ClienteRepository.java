@@ -61,4 +61,6 @@ public interface ClienteRepository extends BaseRepository<Cliente, Long> {
             "    cantidad_total_comprada DESC;", nativeQuery = true)
     List<Object[]> rankingClientes(String rubro, String desde, String hasta);
 
+    @Query(value = "SELECT * FROM cliente")
+    List<Cliente> obtenerListaCliente();
 }
