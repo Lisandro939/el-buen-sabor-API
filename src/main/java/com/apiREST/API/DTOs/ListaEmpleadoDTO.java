@@ -7,14 +7,14 @@ import lombok.*;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor(access = AccessLevel.PUBLIC)
-public class EmpleadoDTO {
+public class ListaEmpleadoDTO {
     private String nombre;
     private String apellido;
-    private long telefono;
+    private Rol rol;
     private String email;
+    private long telefono;
     private String calle;
     private int numero;
     private String localidad;
-    private Rol rol;
     private String estado;
 }

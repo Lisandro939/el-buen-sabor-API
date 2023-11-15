@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.sql.SQLException;
 
-
+@CrossOrigin(origins = "*")
 public abstract class BaseControllerImpl <E extends BaseEntidad, S extends BaseServiceImpl<E, Long>> implements BaseController<E, Long> {
 
     @Autowired

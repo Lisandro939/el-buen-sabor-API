@@ -3,11 +3,14 @@ package com.apiREST.API.Controllers;
 import com.apiREST.API.Models.BaseEntidad;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import java.io.Serializable;
 
+@CrossOrigin(origins = "*", methods = {RequestMethod.DELETE, RequestMethod.PUT, RequestMethod.GET, RequestMethod.POST, RequestMethod.OPTIONS})
 public interface BaseController <E extends BaseEntidad, ID extends Serializable> {
 
     public ResponseEntity<?> getAll();
