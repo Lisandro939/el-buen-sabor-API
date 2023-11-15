@@ -23,6 +23,10 @@ public interface FacturaRepository extends BaseRepository<Factura, Long> {
 //    @Query("SELECT f FROM Factura f WHERE f.pedido = :pedido")
 //    Factura obtenerFacturaPorPedido(@Param("pedido") Pedido pedido);
 
+    //Consulta para encontrar factura por su nro
+    @Query(value = "SELECT * FROM factura WHERE numero LIKE %?1%", nativeQuery = true)
+    Factura findByNroComprobante(int nroComprobante);
+
     // Consulta personalizada para obtener una factura por su ID
 //    @Query("SELECT f FROM Factura f WHERE f.id = :facturaId")
 //    Factura obtenerFacturaPorId(@Param("facturaId") Long facturaId);

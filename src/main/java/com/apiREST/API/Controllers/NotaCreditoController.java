@@ -6,6 +6,7 @@ import com.apiREST.API.Models.Factura;
 import com.apiREST.API.Models.NotaCredito;
 import com.apiREST.API.Services.FacturaService;
 import com.apiREST.API.Services.NotaCreditoServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -29,12 +30,16 @@ public class NotaCreditoController extends BaseControllerImpl<NotaCredito, NotaC
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("{\"error\":\"" + e.getMessage() + "\"}");
         }
     };
-    /*
+
+    @Autowired
+    FacturaService facturaService;
+
     @GetMapping("/NewNotaCredito")
-    public ResponseEntity<?> newNotaCredito(@RequestParam NotaCreditoDTO notaCreditoDTO){
+    public ResponseEntity<?> newNotaCredito(@RequestBody NotaCreditoDTO notaCreditoDTO){
         try {
             //Cargar Nueva nota credito
             NotaCredito notaCredito = new NotaCredito();
+
             //Cargamos datos a la nota de credito
             notaCredito.setFechaNotaCredito(notaCreditoDTO.getFechaNotaCredito());
             notaCredito.setCondicionIva(notaCreditoDTO.getCondicionIva());
@@ -43,31 +48,25 @@ public class NotaCreditoController extends BaseControllerImpl<NotaCredito, NotaC
             notaCredito.setNroComprobante(notaCreditoDTO.getNroComprobante());
             notaCredito.setCondicionVenta(notaCreditoDTO.getCondicionVenta());
 
-            //Traer todas las facturas realizadas
-            List<Factura> facturas = FacturaService.findAll();
+            //Buscar factura a traves del metodo
+            Factura factura = facturaService.findByNroComprobante(notaCreditoDTO.getNroComprobante());
 
-            //Recorremos todas las Facturas encontradas
-            Factura facturaEncontrada = null;
-            for (Factura factura : facturas) {
-                if ((factura.getNumero())==(notaCreditoDTO.getNroComprobante())) {
-                    facturaEncontrada = factura;
-                    break; // Rompe el bucle cuando se encuentra la factura
-                }
+            //Si la factura en cuestion no existe anulamos la creacion
+            if(factura == null){
+                return ResponseEntity.status(400).body("El número de factura ingresado no existe.");
             }
+            //asociamos la nota de credito a la factura
+            factura.setNotaCredito(notaCredito);
 
-            if (facturaEncontrada == null) {
-                return ResponseEntity.status(404).body("No se encontró la factura con el número de comprobante proporcionado");
-            }
-            //hacemos relacion
-            facturaEncontrada.setNotaCredito(notaCredito);
-            //guardamos la nota de credito
+            //Guardamos la nota de credito y la factura
+            facturaService.save(factura);
             servicio.save(notaCredito);
-            //Devolvemoms con exito nuestra nota de credito
-            return new ResponseEntity<>("Nota de Credito creada exitosamente", HttpStatus.CREATED);
+
+            return new ResponseEntity<>("Nota de Credito creado exitosamente", HttpStatus.CREATED);
 
         } catch(Exception e){
             return ResponseEntity.status(500).body(e.getMessage());
         }
     }
-    */
+
 }

@@ -12,6 +12,8 @@ public interface FacturaService extends BaseService<Factura, Long> {
 
     Page<Factura> searchPaged(String filtro, Pageable pageable) throws Exception;
 
+    Factura findByNroComprobante(int nroComprobante) throws Exception;
+
     //Historial pedidos
 //    Factura obtenerFacturaPorId(Long facturaId);
 

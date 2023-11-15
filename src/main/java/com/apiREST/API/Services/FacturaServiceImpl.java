@@ -41,4 +41,14 @@ public class FacturaServiceImpl extends BaseServiceImpl<Factura,Long> implements
         }
     }
 
+    @Override
+    public Factura findByNroComprobante(int nroComprobante) throws Exception {
+        try{
+            Factura factura = facturaRepository.findByNroComprobante(nroComprobante);
+            return factura;
+        }catch(Exception e){
+            throw new Exception(e.getMessage());
+        }
+
+    }
 }
