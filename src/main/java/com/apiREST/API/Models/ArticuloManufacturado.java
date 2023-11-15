@@ -1,5 +1,7 @@
 package com.apiREST.API.Models;
 
+import com.apiREST.API.Enums.EstadoArticulo;
+import com.apiREST.API.Enums.NivelStock;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -25,6 +27,8 @@ public class ArticuloManufacturado extends BaseEntidad {
     private int stockMinimo;
     private int stockActual;
     private String unidadMedida;
+    private NivelStock nivelStock;
+    private EstadoArticulo estadoArticulo;
 
     @Column(name = "fecha_baja", length = 50, nullable = true)
     private Date fechaBaja;

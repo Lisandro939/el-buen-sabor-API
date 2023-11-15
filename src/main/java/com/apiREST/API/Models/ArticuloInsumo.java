@@ -21,6 +21,7 @@ public class ArticuloInsumo extends BaseEntidad {
     private double stockMinimo;
     private String unidadMedida;
     private boolean esInsumo;
+    private String estado;
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     @JoinColumn(name = "articuloManufacturadoDetalle_id", referencedColumnName = "id")

@@ -1,10 +1,15 @@
 package com.apiREST.API.Controllers;
 
+
+import com.apiREST.API.Models.RubroArticulo;
 import com.apiREST.API.Models.RubroGeneral;
 import com.apiREST.API.Services.RubroGeneralServiceImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 @CrossOrigin(origins = "*")
@@ -28,4 +33,5 @@ public class RubroGeneralController extends BaseControllerImpl<RubroGeneral, Rub
             return ResponseEntity.status(500).body("{\"error\":\"Error, por favor intente más tarde.\"}");
         }
     }
+
 }
