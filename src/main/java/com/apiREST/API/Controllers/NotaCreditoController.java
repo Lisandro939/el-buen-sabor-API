@@ -11,6 +11,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.Date;
 import java.util.List;
 
@@ -48,19 +50,27 @@ public class NotaCreditoController extends BaseControllerImpl<NotaCredito, NotaC
             notaCredito.setNroComprobante(notaCreditoDTO.getNroComprobante());
             notaCredito.setCondicionVenta(notaCreditoDTO.getCondicionVenta());
 
+            // Establecer la fecha y hora actuales
+            LocalDateTime now = LocalDateTime.now();
+            Date fechaActual = Date.from(now.atZone(ZoneId.systemDefault()).toInstant());
+            notaCredito.setFechaNotaCredito(fechaActual);
+
             //Buscar factura a traves del metodo
             Factura factura = facturaService.findByNroComprobante(notaCreditoDTO.getNroComprobante());
 
             //Si la factura en cuestion no existe anulamos la creacion
             if(factura == null){
-                return ResponseEntity.status(400).body("El número de factura ingresado no existe.");
+                throw new RuntimeException("La facura ingresada no existe");
             }
+            if((factura.getNotaCredito()) != null){
+                throw new RuntimeException("La factura ingresada ya tiene otra Nota de Credito");
+            }
+
             //asociamos la nota de credito a la factura
             factura.setNotaCredito(notaCredito);
 
             //Guardamos la nota de credito y la factura
             facturaService.save(factura);
-            servicio.save(notaCredito);
 
             return new ResponseEntity<>("Nota de Credito creado exitosamente", HttpStatus.CREATED);
 
