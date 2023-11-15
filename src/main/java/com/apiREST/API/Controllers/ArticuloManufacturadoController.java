@@ -1,6 +1,8 @@
 package com.apiREST.API.Controllers;
 
 import com.apiREST.API.DTOs.ProductoDTO;
+import com.apiREST.API.Enums.EstadoArticulo;
+import com.apiREST.API.Enums.NivelStock;
 import com.apiREST.API.Models.ArticuloManufacturado;
 import com.apiREST.API.Models.RubroGeneral;
 import com.apiREST.API.Services.ArticuloManufacturadoServiceImpl;
@@ -42,7 +44,7 @@ public class ArticuloManufacturadoController extends BaseControllerImpl<Articulo
     }
 
     @GetMapping("/newProduct")
-    public ResponseEntity<?> newProduct(@RequestParam ProductoDTO productoDTO){
+    public ResponseEntity<?> newProduct(@RequestBody ProductoDTO productoDTO){
         try {
             ArticuloManufacturado articulomanufacturado = new ArticuloManufacturado();
 
@@ -51,13 +53,31 @@ public class ArticuloManufacturadoController extends BaseControllerImpl<Articulo
             articulomanufacturado.setStockMinimo(productoDTO.getStockMinimo());
             articulomanufacturado.setStockActual(productoDTO.getStockActual());
             articulomanufacturado.setPrecioCosto(productoDTO.getPrecioDeCosto());
+            articulomanufacturado.setPrecioVenta(productoDTO.getPrecioDeVenta());
+            articulomanufacturado.setTiempoEstimadoCocina(productoDTO.getTiempoEnCocina());
+            articulomanufacturado.setUnidadMedida(productoDTO.getUnidadDeMedida());
+            articulomanufacturado.setReceta(productoDTO.getReceta());
+
+            //Designamos el nivel de stock inicial
+            if((articulomanufacturado.getStockActual()) > (articulomanufacturado.getStockMinimo())){
+                articulomanufacturado.setNivelStock(NivelStock.Alto);
+            }
+            else {
+                articulomanufacturado.setNivelStock(NivelStock.Bajo);
+            }
+
+            //Designamos el Estado de nuestro articulo
+            articulomanufacturado.setEstadoArticulo(EstadoArticulo.Alta);
+
             //Cargamos el Rubro
             RubroGeneral rubroGeneral = new RubroGeneral();
-
             rubroGeneral.setDenominacion(productoDTO.getRubro());
 
             //le asociamos el rubro a el articuloManufacturado
             articulomanufacturado.setRubroGeneral(rubroGeneral);
+
+            //Guardamos
+            servicio.save(articulomanufacturado);
 
             return new ResponseEntity<>("articulo creado exitosamente", HttpStatus.CREATED);
 
