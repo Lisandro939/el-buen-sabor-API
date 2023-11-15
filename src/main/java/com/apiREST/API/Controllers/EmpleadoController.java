@@ -1,9 +1,7 @@
 package com.apiREST.API.Controllers;
 
-import com.apiREST.API.DTOs.DatosClienteDTO;
-import com.apiREST.API.DTOs.EmpleadoDTO;
+import com.apiREST.API.DTOs.DTOEmpleado;
 import com.apiREST.API.DTOs.NuevoEmpleadoDTO;
-import com.apiREST.API.Models.Cliente;
 import com.apiREST.API.Models.Domicilio;
 import com.apiREST.API.Models.Empleado;
 import com.apiREST.API.Models.Usuario;
@@ -18,38 +16,37 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@CrossOrigin(origins = "")
+@CrossOrigin(origins = "*")
 @RequestMapping(path = "api/v1/empleados")
 public class EmpleadoController extends BaseControllerImpl<Empleado, EmpleadoServiceImpl> {
 
     @Autowired
     EmpleadoService empleadoService;
+    
     //Enlistar Todos los Empleados
     @GetMapping("/listaEmpleados")
     public ResponseEntity<?> obtenerListaEmpleados() {
         try {
             List<Empleado> empleados = empleadoService.obtenerListaEmpleado();
-            List<EmpleadoDTO> listaEmpleadosDTO = new ArrayList<>();
+            List<DTOEmpleado> listaEmpleadosDTO = new ArrayList<>();
 
             for (Empleado empleado : empleados) {
-                EmpleadoDTO listaEmpleadoDTO = new EmpleadoDTO();
-                listaEmpleadoDTO.setNombre(empleado.getNombre());
-                listaEmpleadoDTO.setApellido(empleado.getApellido());
-                listaEmpleadoDTO.setRol(empleado.getUsuario().getRol());
-                listaEmpleadoDTO.setEmail(empleado.getEmail());
-                listaEmpleadoDTO.setTelefono(empleado.getTelefono());
-                listaEmpleadoDTO.setCalle(empleado.getDomicilio().getCalle());
-                listaEmpleadoDTO.setNumero(empleado.getDomicilio().getNumero());
-                listaEmpleadoDTO.setLocalidad(empleado.getDomicilio().getLocalidad());
-                // Assuming setEstado is a method in ListaEmpleadoDTO
+                DTOEmpleado listaDTOEmpleado = new DTOEmpleado();
+                listaDTOEmpleado.setId(empleado.getId());
+                listaDTOEmpleado.setNombre(empleado.getNombre());
+                listaDTOEmpleado.setApellido(empleado.getApellido());
+                listaDTOEmpleado.setRol(empleado.getUsuario().getRol());
+                listaDTOEmpleado.setEmail(empleado.getEmail());
+                listaDTOEmpleado.setTelefono(empleado.getTelefono());
+                listaDTOEmpleado.setCalle(empleado.getDomicilio().getCalle());
+                listaDTOEmpleado.setNumero(empleado.getDomicilio().getNumero());
+                listaDTOEmpleado.setLocalidad(empleado.getDomicilio().getLocalidad());
                 if (empleado.getFechaBaja() != null) {
-                    listaEmpleadoDTO.setEstado("Baja");
+                    listaDTOEmpleado.setEstado("Baja");
                 } else {
-                    listaEmpleadoDTO.setEstado("Alta");
+                    listaDTOEmpleado.setEstado("Alta");
                 }
-
-                // Add the populated ListaEmpleadoDTO to the list
-                listaEmpleadosDTO.add(listaEmpleadoDTO);
+                listaEmpleadosDTO.add(listaDTOEmpleado);
             }
 
             return ResponseEntity.status(200).body(listaEmpleadosDTO);
@@ -103,35 +100,6 @@ public class EmpleadoController extends BaseControllerImpl<Empleado, EmpleadoSer
             return ResponseEntity.status(500).body(e.getMessage());
         }
     }
-
-    @GetMapping("/login")
-    public ResponseEntity<?> login(@RequestParam String email, @RequestParam String clave) {
-        try {
-            return ResponseEntity.status(200).body(servicio.login(email, clave));
-        } catch (Exception e) {
-            return ResponseEntity.status(500).body(e.getMessage());
-        }
-    }
-    @GetMapping("/datos")
-        public ResponseEntity<?> datosEmpleado(@RequestParam String email) {
-        try {
-            Empleado empleado = servicio.findByEmail(email);
-
-            EmpleadoDTO empleadoDTO = new EmpleadoDTO();
-
-            empleadoDTO.setNombre(empleado.getNombre());
-            empleadoDTO.setApellido(empleado.getApellido());
-            empleadoDTO.setTelefono(empleado.getTelefono());
-            empleadoDTO.setEmail(empleado.getEmail());
-            empleadoDTO.setCalle(empleado.getDomicilio().getCalle());
-            empleadoDTO.setNumero(empleado.getDomicilio().getNumero());
-            empleadoDTO.setLocalidad(empleado.getDomicilio().getLocalidad());
-            empleadoDTO.setRol(empleado.getUsuario().getRol());
-            empleadoDTO.setEstado(empleadoDTO.getEstado());
-            return ResponseEntity.status(200).body(empleadoDTO);
-        } catch (Exception e) {
-            return ResponseEntity.status(500).body(e.getMessage());
-        }
-    }
+    
+   
 }
-
