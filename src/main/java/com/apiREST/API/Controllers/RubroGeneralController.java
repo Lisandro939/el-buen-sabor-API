@@ -1,7 +1,6 @@
 package com.apiREST.API.Controllers;
 
-import com.apiREST.API.DTOs.DTOABMRubroArticulo;
-import com.apiREST.API.DTOs.DTOABMRubroGeneral;
+
 import com.apiREST.API.Models.RubroArticulo;
 import com.apiREST.API.Models.RubroGeneral;
 import com.apiREST.API.Services.RubroGeneralServiceImpl;
