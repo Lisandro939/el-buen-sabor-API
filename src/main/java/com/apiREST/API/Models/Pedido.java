@@ -1,5 +1,6 @@
 package com.apiREST.API.Models;
 
+import com.apiREST.API.Enums.EstadoPago;
 import com.apiREST.API.Enums.EstadoPedido;
 import com.apiREST.API.Enums.TipoEnvio;
 import jakarta.persistence.*;
@@ -20,6 +21,9 @@ public class Pedido extends BaseEntidad {
 
     @Column(name = "fecha", length = 50, nullable = false)
     private Date fecha;
+
+    @Column(name = "estadoPago", length = 50, nullable = false)
+    private EstadoPago estadoPago;
 
     @Column(name = "numero", length = 50, nullable = false)
     private int numero;
