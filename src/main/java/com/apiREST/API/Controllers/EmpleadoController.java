@@ -7,6 +7,7 @@ import com.apiREST.API.Models.Empleado;
 import com.apiREST.API.Models.Usuario;
 import com.apiREST.API.Services.EmpleadoService;
 import com.apiREST.API.Services.EmpleadoServiceImpl;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,6 +19,7 @@ import java.util.List;
 @RestController
 @CrossOrigin(origins = "*")
 @RequestMapping(path = "api/v1/empleados")
+@RequiredArgsConstructor
 public class EmpleadoController extends BaseControllerImpl<Empleado, EmpleadoServiceImpl> {
 
     @Autowired

@@ -2,6 +2,7 @@ package com.apiREST.API.Services;
 
 import com.apiREST.API.DTOs.RankingClientesDTO;
 import com.apiREST.API.Models.Cliente;
+import com.apiREST.API.Models.Empleado;
 import com.apiREST.API.Repositories.BaseRepository;
 import com.apiREST.API.Repositories.ClienteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -90,6 +91,16 @@ public class ClienteServiceImpl extends BaseServiceImpl<Cliente,Long> implements
             return dtos;
         } catch (Exception e) {
             throw new Exception(e.getMessage());
+        }
+    }
+
+    @Override
+    public List<Cliente> obtenerListaCliente() throws Exception{
+        try{
+            List<Cliente> entities = clienteRepository.obtenerListaCliente();
+            return  entities;
+        } catch (Exception e){
+            throw new Exception("Error al obtener los Cliente: " + e.getMessage());
         }
     }
 }

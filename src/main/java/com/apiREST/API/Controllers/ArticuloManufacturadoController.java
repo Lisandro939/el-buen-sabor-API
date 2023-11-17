@@ -86,4 +86,32 @@ public class ArticuloManufacturadoController extends BaseControllerImpl<Articulo
         }
     }
 
+    @GetMapping("/modifyProduct")
+    public ResponseEntity<?> modifyProduct(@RequestParam ProductoDTO productoDTO){
+      try{
+          //Buscamos el articulo a modificar
+          ArticuloManufacturado articuloManufacturado = servicio.findByName(productoDTO.getProducto());
+
+          //Llenamos los datos
+          articuloManufacturado.setDenominacion(productoDTO.getProducto());
+          articuloManufacturado.setStockMinimo(productoDTO.getStockMinimo());
+          articuloManufacturado.setStockActual(productoDTO.getStockActual());
+          articuloManufacturado.setPrecioCosto(productoDTO.getPrecioDeCosto());
+          //Creamos el rubro y lo agregamos
+          RubroGeneral rubroGeneral = new RubroGeneral();
+          rubroGeneral.setDenominacion(productoDTO.getRubro());
+          articuloManufacturado.setRubroGeneral(rubroGeneral);
+          //Guardamos Cambios
+          servicio.save(articuloManufacturado);
+          //Devolvemos la response
+          return new ResponseEntity<>("articulo modificado exitosamente", HttpStatus.OK);
+
+
+
+      } catch (Exception e){
+          return ResponseEntity.status(500).body(e.getMessage());
+      }
+    }
+
+
 }

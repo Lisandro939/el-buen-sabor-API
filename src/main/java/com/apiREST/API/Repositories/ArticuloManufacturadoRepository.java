@@ -2,6 +2,7 @@ package com.apiREST.API.Repositories;
 
 import com.apiREST.API.DTOs.RankingProductosDTO;
 import com.apiREST.API.Models.ArticuloManufacturado;
+import com.apiREST.API.Models.Cliente;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Query;
@@ -15,6 +16,9 @@ public interface ArticuloManufacturadoRepository extends BaseRepository<Articulo
 
     @Query(value = "SELECT * FROM articulo_manufacturado WHERE denominacion LIKE %?1%", nativeQuery = true)
     Page<ArticuloManufacturado> searchPaged(String filtro, Pageable pageable);
+
+    @Query(value = "SELECT * FROM articulo_manufacturado WHERE email = %?1%", nativeQuery = true)
+    ArticuloManufacturado findByName(String denominacion);
 
     @Query(value = "SELECT\n" +
             "    am.id,\n" +
