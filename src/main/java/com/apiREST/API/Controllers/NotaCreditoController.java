@@ -36,7 +36,7 @@ public class NotaCreditoController extends BaseControllerImpl<NotaCredito, NotaC
     @Autowired
     FacturaService facturaService;
 
-    @GetMapping("/NewNotaCredito")
+    @PostMapping("/NewNotaCredito")
     public ResponseEntity<?> newNotaCredito(@RequestBody NotaCreditoDTO notaCreditoDTO){
         try {
             //Cargar Nueva nota credito

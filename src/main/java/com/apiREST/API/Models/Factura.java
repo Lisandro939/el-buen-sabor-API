@@ -16,20 +16,16 @@ import java.util.List;
 @Table(name = "factura")
 public class Factura extends BaseEntidad {
 
+    @Temporal(TemporalType.DATE)
     private Date fecha;
-
     private int numero;
-
     private double montoDescuento;
 
     @Column(name = "forma_pago", length = 50, nullable = false)
     @Enumerated(EnumType.STRING)
     private FormaPago formaPago;
-
     private String nroTarjeta;
-
     private double totalVenta;
-
     private double totalCosto;
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)

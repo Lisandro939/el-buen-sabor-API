@@ -43,7 +43,7 @@ public class ArticuloManufacturadoController extends BaseControllerImpl<Articulo
         }
     }
 
-    @GetMapping("/newProduct")
+    @PostMapping("/newProduct")
     public ResponseEntity<?> newProduct(@RequestBody ProductoDTO productoDTO){
         try {
             ArticuloManufacturado articulomanufacturado = new ArticuloManufacturado();
